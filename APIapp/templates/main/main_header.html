@@ -1,0 +1,53 @@
+{% load static %}
+<nav class="navbar navbar-dark bg-dark fixed-top">
+  <div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+    <a class="navbar-brand" href="#">
+      <img src="{% static 'APIapp/database-icon.jpg' %}" alt="" width="30" height="30" class="d-inline-block align-text-top">
+      GBH Database
+    </a>
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <li class="nav-item dropdown">
+        <a class="nav-link text-light" href="#" id="gameDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Game
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="gameDropdown">
+          <li><a class="dropdown-item" href="#">Rules</a></li>
+          <li><a class="dropdown-item" href="#">Lore</a></li>
+          <li><a class="dropdown-item" href="#">Mechanics</a></li>
+          <li><a class="dropdown-item" href="#">Gallery</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link text-light" href="#" id="heroDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Heroes
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="heroDropdown">
+          <li><a class="dropdown-item" href="#">Characters</a></li>
+          <li><a class="dropdown-item" href="#">Abilities</a></li>
+          <li><a class="dropdown-item" href="#">Equipment</a></li>
+          <li><a class="dropdown-item" href="#">Consumables</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link text-light" href="#" id="towerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Tower
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="towerDropdown">
+          <li><a class="dropdown-item" href="#">Enfilades</a></li>
+          <li><a class="dropdown-item" href="#">Monsters</a></li>
+          <li><a class="dropdown-item" href="#">Bosses</a></li>
+          <li><a class="dropdown-item" href="#">Locations</a></li>
+          <li><a class="dropdown-item" href="#">Events</a></li>
+        </ul>
+      </li>
+
+    </ul>
+    <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search database" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
