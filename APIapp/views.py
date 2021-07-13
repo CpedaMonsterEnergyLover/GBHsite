@@ -3,4 +3,4 @@ from django.shortcuts import render
 
 
 def wpage(request):
-    return render(request, 'details/test.html')
+    return render(request, 'main/main.html')
