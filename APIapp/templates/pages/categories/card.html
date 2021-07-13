@@ -1,0 +1,16 @@
+<style>
+  .cardimage{
+    height: 10rem;
+    object-fit: cover;
+  }
+</style>
+<div class="col-4 p-2">
+  <div class="card" style="background-color: white">
+    <a href="#" title="{{ tip|default:'tip' }}">
+      <img src="{{link}}" class="card-img-top cardimage" alt="">
+    </a>
+    <div class="card-body">
+      <h5 class="card-title">{{ title|default:'Title' }}</h5>
+    </div>
+  </div>
+</div>

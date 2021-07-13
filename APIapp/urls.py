@@ -2,5 +2,5 @@ from django.urls import path
 from . import views;
 
 urlpatterns = [
-    path('api/', views.wpage),
+    path('categories/', views.categories),
 ]

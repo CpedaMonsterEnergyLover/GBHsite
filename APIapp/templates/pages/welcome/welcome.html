@@ -9,18 +9,22 @@
     min-width: 40px;
     min-height: 40px;
 }
+.whitetext{
+    color: #d2d0d0;
+}
+
 </style>
 {% load static %}
 <div class="container fillh d-flex justify-content-center">
-  <div class="d-flex flex-column bg-body justify-content-center">
+  <div class="d-flex flex-column justify-content-center">
 
-    {% comment %} Icon and header MAKE ICON DISAPPEAR ON SMALL DEVICES{% endcomment %}
+    {% comment %} Icon and header MAKE ICON DISAPPEAR ON SMALL DEVICES {% endcomment %}
     <div class="row mx-2 pt-1" style="min-width: 30vw">
       <div class="col-sm-2 iconrow">
         <img src="{% static 'APIapp/database-icon.jpg' %}" alt="" class="img-fluid text-end" id="database_icon">
       </div>
       <div class="col-sm">
-        <p class="text-center text-nowrap fs-1">God Bless the Heroes Database</p>
+        <p class="text-center text-nowrap fs-1 fw-bold whitetext">God Bless the Heroes Database</p>
       </div>
     </div>
 
@@ -38,16 +42,18 @@
     {% comment %} Buttons {% endcomment %}
     <div class="px-5">
       <div class="d-flex flex-row p-2 justify-content-center">
-        <div class="p-2 bd-highlight">
-          <button type="button" class="btn btn-primary text-nowrap">Categories</button>
+        <div class="p-2">
+          <a href="categories/" class="btn btn-outline-light text-nowrap" role="button">Categories</a>
         </div>
-        <div class="p-2 bd-highlight">
-          <button type="button" class="btn btn-primary text-nowrap">Advanced search</button>
+        <div class="p-2">
+          <button type="button" class="btn btn-outline-light text-nowrap">Advanced search</button>
         </div>
-        <div class="p-2 bd-highlight">
-          <button type="button" class="btn btn-primary text-nowrap">Random</button>
+        <div class="p-2">
+          <button type="button" class="btn btn-outline-light text-nowrap">Random</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+{% comment %} FOOTER {% endcomment %}
+{% include "footer/footer.html" %}

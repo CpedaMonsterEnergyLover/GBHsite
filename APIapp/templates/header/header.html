@@ -1,9 +1,14 @@
 {% load static %}
-<nav class="navbar navbar-dark bg-dark fixed-top">
-  <div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
-    <a class="navbar-brand" href="#">
-      <img src="{% static 'APIapp/database-icon.jpg' %}" alt="" width="30" height="30" class="d-inline-block align-text-top">
-      GBH Database
+<style>
+.mw-65{
+  max-width: 65rem;
+}
+</style>
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between mw-65">
+    <a class="navbar-brand" href="/">
+      <img src="{% static 'APIapp/database-icon.jpg' %}" alt="Back to homepage" title="Back to homepage" width="30" height="30" class="d-inline-block align-text-top">
+      <span class="text-light">GBH Database</span>
     </a>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -33,10 +38,9 @@
 
       <li class="nav-item dropdown">
         <a class="nav-link text-light" href="#" id="towerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Tower
+          The Tower
         </a>
         <ul class="dropdown-menu" aria-labelledby="towerDropdown">
-          <li><a class="dropdown-item" href="#">Enfilades</a></li>
           <li><a class="dropdown-item" href="#">Monsters</a></li>
           <li><a class="dropdown-item" href="#">Bosses</a></li>
           <li><a class="dropdown-item" href="#">Locations</a></li>
