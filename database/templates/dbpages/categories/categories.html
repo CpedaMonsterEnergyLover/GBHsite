@@ -1,0 +1,43 @@
+<style>
+.mv-50{
+  max-width: 50rem;
+}
+.headerfont{
+    font-family: Verdanaf, sans-serif;
+}
+</style>
+<div class="container-fluid mh-100 h-100 mv-50">
+  <div class="container">
+    <h1 class="pt-2 text-light headerfont border-bottom border-2">Categories</h1>
+  </div>
+  <div class="container pb-2">
+    <h2 class="text-light">Game</h2>
+    <div class="row">
+      {% include 'dbpages/categories/card.html' with title="Rules" tip='Browse game rules' link='https://849310.smushcdn.com/1803394/wp-content/uploads/2018/07/orleans-1024x576.jpg?lossy=1&strip=1&webp=1'%}
+      {% include 'dbpages/categories/card.html' with title="Lore" tip='Read game lore' link='https://pbs.twimg.com/media/D1CA9ABU4AA_x3Q.jpg'%}
+      {% include 'dbpages/categories/card.html' with title="Mechanics" tip='Learn game mechanics' link='http://pm1.narvii.com/6273/e5ff7494a3b3c6ff89f9ee4394d77c49cc6dee79_00.jpg'%}
+    </div>
+    <div class="row">
+      {% include 'dbpages/categories/card.html' with title="Achievements" tip='Get achievements' link='https://external-preview.redd.it/t6QF6W_IsVOcgzooxhxfnB-6o_TcGiVy5ng5tORNAxg.png?format=pjpg&auto=webp&s=648ab44172042f7537066da1161ac3bda5da8dbf'%}
+      {% include 'dbpages/categories/card.html' with title="Gallery" tip='Browse art' link='https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/77296b35886301.5706ea5cb9a29.jpg'%}
+    </div>
+    <h2 class="text-light">Heroes</h2>
+    <div class="row">
+      {% include 'dbpages/categories/card.html' with title="Characters" tip='Browse characters' link='https://img4.goodfon.ru/wallpaper/nbig/c/6a/hearthstone-new-skin-rouge-maiev-shadowsong-world-of-warcraf.jpg'%}
+      {% include 'dbpages/categories/card.html' with title="Abilities" tip='Browse abilities' link='https://cdn1.dotesports.com/wp-content/uploads/2018/12/20163612/667px-Hammer_of_Wrath_full.jpg'%}
+      {% include 'dbpages/categories/card.html' with title="Equipment" tip='Browse equipment' link='https://i.pinimg.com/474x/70/3a/50/703a50d94a5d1ea84789ab57977f14a9.jpg'%}
+    </div>
+    <div class="row">
+      {% include 'dbpages/categories/card.html' with title="Consumables" tip='Browse consumables' link='https://i.pinimg.com/originals/62/03/e2/6203e22b2594c777ef338d1bec43751b.jpg'%}
+    </div>
+    <h2 class="text-light">The Tower</h2>
+    <div class="row">
+      {% include 'dbpages/categories/card.html' with title="Bosses" tip='Die to bosses' link='https://img.cinemablend.com/filter:scale/cb/4/8/6/5/5/8/486558a0afdf499ed979d2c982827df127dfbb3b5caec6fffb499e8c631633ee.jpg?fw=1200'%}
+      {% include 'dbpages/categories/card.html' with title="Monsters" tip='Hunt monsters' link='https://i.pinimg.com/originals/37/76/6f/37766f7ea38085757c4dd24bfa3eb898.jpg'%}
+      {% include 'dbpages/categories/card.html' with title="Locations" tip='Visit locations' link='https://cdnb.artstation.com/p/assets/images/images/032/951/867/large/matthew-mckeown-9-0-loadingscreencastlenathria.jpg?1607970557'%}
+    </div>
+    <div class="row">
+      {% include 'dbpages/categories/card.html' with title="Events" tip='Browse events' link='https://cdn.vox-cdn.com/thumbor/Rl0r6zSnZ5x6KYAhghkHxY7p_Lk=/0x0:1280x720/1400x1400/filters:focal(538x258:742x462):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/47651829/hearthstone-league-of-explorers-screencap_1280.0.0.jpg'%}
+    </div>
+  </div>
+</div>

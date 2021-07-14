@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('attack', models.IntegerField(verbose_name='Кол-во кубиков атаки')),
                 ('defense', models.IntegerField(verbose_name='Кол-во кубиков защиты')),
                 ('rotation_type', models.IntegerField(choices=[(1, 'Бродящий'), (2, 'Патрулирующий'), (3, 'Быстрый')], verbose_name='Тип движения')),
-                ('rotation_locations', models.ManyToManyField(to='APIapp.LocationType', verbose_name='Типы локаций')),
+                ('rotation_locations', models.ManyToManyField(to='home.LocationType', verbose_name='Типы локаций')),
             ],
         ),
     ]

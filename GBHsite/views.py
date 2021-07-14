@@ -1,6 +1,9 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 
 
-def index(request):
-    return render(request, 'pages/welcome/main.html')
+def welcomesite(request):
+    return render(request, 'sitepages/home/root.html')
+
+
+def signup(request):
+    return render(request, 'sitepages/signup/root.html')

@@ -1,0 +1,48 @@
+{% load static %}
+<style>
+.mw-65{
+  max-width: 65rem;
+}
+.mw-60{
+    max-width: 60rem;
+}
+.headerimage{
+  padding-top: 5rem;
+  height: 25vh;
+  object-fit: cover;
+    object-position: top;
+}
+</style>
+<div class="container-fluid">
+  <div class="container-fluid mw-65">
+      <img src="https://img.desktopwallpapers.ru/animals/pics/wide/1920x1080/9463d32731c87e3024bdb99fae14117b.jpg" class="card-img-top headerimage p-0 m-0 shadow" alt="">
+  </div>
+  <nav class="navbar container navbar-expand-sm navbar-dark bg-dark mw-65 rounded">
+    <div class="container d-flex flex-wrap justify-content-center">
+      <a class="navbar-brand" href="#">BlessTheHeroes</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link disabled" href="#">Game Guide</a>
+          <a class="nav-link disabled" href="#">News</a>
+          <a class="nav-link" href="db">Database</a>
+          <a class="nav-link disabled" href="#">Shop</a>
+          <a class="nav-link disabled" href="#">Community</a>
+          <a class="nav-link disabled" href="#">Download</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="{% static 'APIapp/user.png' %}" alt="" width="32" height="32" class="rounded-circle">
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+          <li><a class="dropdown-item" href="#">Log in</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Sign up</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>

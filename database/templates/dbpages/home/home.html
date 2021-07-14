@@ -11,6 +11,7 @@
 }
 .whitetext{
     color: #d2d0d0;
+    border-color: #d2d0d0;
 }
 
 </style>
@@ -18,13 +19,13 @@
 <div class="container fillh d-flex justify-content-center">
   <div class="d-flex flex-column justify-content-center">
 
-    {% comment %} Icon and header MAKE ICON DISAPPEAR ON SMALL DEVICES {% endcomment %}
+    {% comment %} Icon and dbheader MAKE ICON DISAPPEAR ON SMALL DEVICES {% endcomment %}
     <div class="row mx-2 pt-1" style="min-width: 30vw">
       <div class="col-sm-2 iconrow">
         <img src="{% static 'APIapp/database-icon.jpg' %}" alt="" class="img-fluid text-end" id="database_icon">
       </div>
       <div class="col-sm">
-        <p class="text-center text-nowrap fs-1 fw-bold whitetext">God Bless the Heroes Database</p>
+        <p class="text-center text-nowrap fs-1 fw-bold text-light">Bless the Heroes Database</p>
       </div>
     </div>
 
@@ -43,7 +44,7 @@
     <div class="px-5">
       <div class="d-flex flex-row p-2 justify-content-center">
         <div class="p-2">
-          <a href="categories/" class="btn btn-outline-light text-nowrap" role="button">Categories</a>
+          <a href="db/categories" class="btn btn-outline-light text-nowrap" role="button">Categories</a>
         </div>
         <div class="p-2">
           <button type="button" class="btn btn-outline-light text-nowrap">Advanced search</button>
@@ -51,9 +52,10 @@
         <div class="p-2">
           <button type="button" class="btn btn-outline-light text-nowrap">Random</button>
         </div>
+        <div class="p-2">
+          <a href="/" class="btn btn-outline-light text-nowrap" role="button">Home page</a>
+        </div>
       </div>
     </div>
   </div>
 </div>
-{% comment %} FOOTER {% endcomment %}
-{% include "footer/footer.html" %}
