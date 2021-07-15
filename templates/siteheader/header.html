@@ -12,6 +12,9 @@
   object-fit: cover;
     object-position: top;
 }
+.hiddenoption{
+    display: none;
+}
 </style>
 <div class="container-fluid">
   <div class="container-fluid mw-65">
@@ -19,7 +22,7 @@
   </div>
   <nav class="navbar container navbar-expand-sm navbar-dark bg-dark mw-65 rounded">
     <div class="container d-flex flex-wrap justify-content-center">
-      <a class="navbar-brand" href="#">BlessTheHeroes</a>
+      <a class="navbar-brand" href="/">BlessTheHeroes</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -33,14 +36,18 @@
           <a class="nav-link disabled" href="#">Download</a>
         </div>
       </div>
+      <div class="text-white mx-2" id="username">
+        guest
+      </div>
       <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
           <img src="{% static 'APIapp/user.png' %}" alt="" width="32" height="32" class="rounded-circle">
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-          <li><a class="dropdown-item" href="#">Log in</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Sign up</a></li>
+          <li><a class="dropdown-item" href="/signin" id="login_option">Log in</a></li>
+          <li><a class="dropdown-item hiddenoption" href="#" id="logout_option">Log out</a></li>
+          <li><hr class="dropdown-divider hiddenoption" id="option_divider"></li>
+          <li><a class="dropdown-item hiddenoption" href="#" id="profile_option">My profile</a></li>
         </ul>
       </div>
     </div>

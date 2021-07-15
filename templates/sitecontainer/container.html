@@ -1,0 +1,18 @@
+<style>
+.pageheight {
+  height: 100%;
+  min-height: 69.5vh;
+}
+</style>
+<div class="container mw-60 pageheight">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="container bg-light rounded-bottom shadow py-1">
+        {% include content|default:'empty.html' %}
+      </div>
+    </div>
+    <div class="col-md-3 d-none d-sm-none d-md-block">
+      {% include 'sitesidebar/sidebar.html' %}
+    </div>
+  </div>
+</div>

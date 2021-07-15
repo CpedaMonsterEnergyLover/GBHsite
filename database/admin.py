@@ -1,6 +1,4 @@
 from django.contrib import admin
-from . import models
+from database import models
 
-
-admin.site.register(models.LocationType)
-admin.site.register(models.Monster)
+admin.site.register(models.Profile)
