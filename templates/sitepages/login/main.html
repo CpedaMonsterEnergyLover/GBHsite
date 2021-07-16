@@ -1,15 +1,22 @@
-<ul class="nav nav-tabs pt-3" id="myTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Log in</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button onclick="window.location.href='/signup'" class="nav-link" id="sign-tab" data-bs-toggle="tab" data-bs-target="#sign" type="button" role="tab" aria-controls="sign" aria-selected="false">Sign up</button>
-  </li>
-</ul>
-<div class="tab-content pb-3" id="myTabContent">
-  <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-    <div class="container bg-white rounded-bottom border-start border-bottom border-end">
-      {% include 'sitepages/login/loginform.html' %}
+{% extends "siteroot/root.html" %}
+{% block content %}
+  <div class="col">
+    <div class="container bg-light rounded-bottom shadow py-1">
+      <ul class="nav nav-tabs pt-3" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Log in</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button onclick="window.location.href='/signup'" class="nav-link" id="sign-tab" data-bs-toggle="tab" data-bs-target="#sign" type="button" role="tab" aria-controls="sign" aria-selected="false">Sign up</button>
+        </li>
+      </ul>
+      <div class="tab-content pb-3" id="myTabContent">
+        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+          <div class="container bg-white rounded-bottom border-start border-bottom border-end">
+            {% include 'sitepages/login/loginform.html' %}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+{% endblock %}

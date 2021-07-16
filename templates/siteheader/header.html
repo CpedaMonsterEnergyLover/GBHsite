@@ -36,18 +36,27 @@
           <a class="nav-link disabled" href="#">Download</a>
         </div>
       </div>
-      <div class="text-white mx-2" id="username">
-        guest
+      <div class="text-white mx-2 ms-3" id="username">
+        {% if user.is_authenticated %}
+          <strong>
+            {{ user.get_username }}
+          </strong>
+        {% else %}
+            guest
+        {% endif %}
       </div>
       <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
           <img src="{% static 'APIapp/user.png' %}" alt="" width="32" height="32" class="rounded-circle">
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-          <li><a class="dropdown-item" href="/signin" id="login_option">Log in</a></li>
-          <li><a class="dropdown-item hiddenoption" href="#" id="logout_option">Log out</a></li>
-          <li><hr class="dropdown-divider hiddenoption" id="option_divider"></li>
-          <li><a class="dropdown-item hiddenoption" href="#" id="profile_option">My profile</a></li>
+         {% if user.is_authenticated %}
+          <li><a class="dropdown-item" href="/profile">My profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="/profile/logout">Log out</a></li>
+        {% else %}
+          <li><a class="dropdown-item" href="/login">Log in</a></li>
+        {% endif %}
         </ul>
       </div>
     </div>

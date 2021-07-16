@@ -1,12 +1,18 @@
-<div class="border-bottom">
-  <h2 class="p-1">Latest news</h2>
-</div>
-{% include 'sitepages/home/article.html' with title="Article" tip='tip' link='https://wallpapercave.com/wp/fjEEA7q.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
-{% include 'sitepages/home/article.html' with title="Article" tip='tip' link='https://wallpaperaccess.com/full/374252.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
-{% include 'sitepages/home/article.html' with title="Article" tip='tip' link='https://cdn.wallpapersafari.com/59/7/gewQOE.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
-{% include 'sitepages/home/article.html' with title="Article" tip='tip' link='https://lovelytab.com/wp-content/uploads/2018/12/img1543916656153-1024x683.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
-{% include 'sitepages/home/article.html' with title="Article" tip='tip' link='https://wallpapercave.com/wp/fjEEA7q.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
-
-
-
-
+{% extends "siteroot/root.html" %}
+{% block content %}
+  <div class="col-md-9">
+    <div class="container bg-light rounded-bottom shadow py-1">
+      <div class="border-bottom">
+        <h2 class="p-1">Latest news</h2>
+      </div>
+      {% include 'sitepages/home/article.html' with title="Article" tip='tip' link='https://wallpapercave.com/wp/fjEEA7q.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
+      {% include 'sitepages/home/article.html' with title="Article" tip='tip' link='https://wallpaperaccess.com/full/374252.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
+      {% include 'sitepages/home/article.html' with title="Article" tip='tip' link='https://cdn.wallpapersafari.com/59/7/gewQOE.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
+      {% include 'sitepages/home/article.html' with title="Article" tip='tip' link='https://lovelytab.com/wp-content/uploads/2018/12/img1543916656153-1024x683.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
+      {% include 'sitepages/home/article.html' with title="Article" tip='tip' link='https://wallpapercave.com/wp/fjEEA7q.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
+    </div>
+  </div>
+  <div class="col-md-3 d-none d-sm-none d-md-block">
+    {% include 'sitesidebar/sidebar.html' with sidebar_content='sitepages/home/sidebar.html' title='Sidebar' %}
+  </div>
+{% endblock %}

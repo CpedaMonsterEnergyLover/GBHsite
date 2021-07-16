@@ -1,15 +1,22 @@
-<ul class="nav nav-tabs pt-3" id="myTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button onclick="window.location.href='/signin'" class="nav-link" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Log in</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="sign-tab" data-bs-toggle="tab" data-bs-target="#sign" type="button" role="tab" aria-controls="sign" aria-selected="false">Sign up</button>
-  </li>
-</ul>
-<div class="tab-content pb-3" id="myTabContent">
-  <div class="tab-pane fade show active" id="sign" role="tabpanel" aria-labelledby="sign-tab">
-    <div class="container-fluid bg-white rounded-bottom border-start border-bottom border-end">
-      {% include 'sitepages/signup/registerform.html' %}
+{% extends "siteroot/root.html" %}
+{% block content %}
+  <div class="col">
+    <div class="container bg-light rounded-bottom shadow py-1">
+      <ul class="nav nav-tabs pt-3" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button onclick="window.location.href='/login'" class="nav-link" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Log in</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="sign-tab" data-bs-toggle="tab" data-bs-target="#sign" type="button" role="tab" aria-controls="sign" aria-selected="false">Sign up</button>
+        </li>
+      </ul>
+      <div class="tab-content pb-3" id="myTabContent">
+        <div class="tab-pane fade show active" id="sign" role="tabpanel" aria-labelledby="sign-tab">
+          <div class="container-fluid bg-white rounded-bottom border-start border-bottom border-end">
+            {% include 'sitepages/signup/registerform.html' %}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+{% endblock %}

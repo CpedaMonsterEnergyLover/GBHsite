@@ -1,36 +1,10 @@
-{% load static %}
-<div class="d-flex flex-column p-3 text-dark bg-light rounded-bottom shadow">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none ">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-      <span class="fs-4">Sidebar</span>
-    </a>
-    <hr>
+<div class="d-flex flex-column p-3 {{ theme }} rounded-bottom shadow">
+  <h5 class="text-center">
+    {{ title }}
+  </h5>
+  <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="#" class="nav-link text-dark" aria-current="page">
-          Home
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-dark">
-          Dashboard
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-dark">
-          Orders
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-dark">
-          Products
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-dark">
-          Customers
-        </a>
-      </li>
+      {% include sidebar_content %}
     </ul>
-    <hr>
-  </div>
+  <hr>
+</div>

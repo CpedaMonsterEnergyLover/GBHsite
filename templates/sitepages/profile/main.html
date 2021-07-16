@@ -1,0 +1,57 @@
+{% extends "siteroot/root.html" %}
+{% load static %}
+{% block content %}
+  <style>
+  .avatar {
+    max-height: 150px;
+    min-width: auto;
+  }
+  </style>
+  <div class="col-md-9">
+    <div class="container theme-gr-mc rounded-bottom shadow py-1">
+      <div class="border-bottom p-1">
+        <h2>Profile info</h2>
+      </div>
+      <div class="d-flex flex-row pb-3">
+        <div class="d-flex flex-column border-end px-3 theme-gr-sc">
+          <div class="fw-bold d-flex justify-content-center pt-2">
+            {{ user.username }}
+          </div>
+          <div class="py-2">
+            <img src="{% static 'APIapp/user.png' %}" class="img-thumbnail rounded-circle avatar" alt="">
+          </div>
+        </div>
+        <div class="container-fluid px-3 theme-gr-sc">
+          <div class="d-inline-flex flex-column pt-2 ">
+            <div>
+              <strong>Email:</strong> {{ user.email }}
+            </div>
+            <div>
+              <strong>Registration date:</strong> {{ user.date_joined }}
+            </div>
+            <div>
+              Something else...
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container theme-gr-mc rounded shadow my-2 py-1">
+      <div class="border-bottom p-1">
+        <h2>Heroes</h2>
+      </div>
+    </div>
+
+    <div class="container theme-gr-mc rounded shadow my-2 py-1">
+      <div class="border-bottom p-1">
+        <h2>Achievements</h2>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-3 d-none d-sm-none d-md-block">
+    {% include 'sitesidebar/sidebar.html' with sidebar_content='sitepages/profile/sidebar.html' title='Profile management' theme='theme-gr-mc'%}
+  </div>
+{% endblock %}
+

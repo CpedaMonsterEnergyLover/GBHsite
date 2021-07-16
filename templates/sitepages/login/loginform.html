@@ -1,20 +1,30 @@
-<form class="p-1">
-
+<form class="p-1" method="POST">
+  {% csrf_token %}
   <div class="mb-3">
-    <label for="{{ login_form.username.id_for_label }}" class="form-label fs-6 pt-1">{{ login_form.username.label_tag }}</label>
-    {{ login_form.username }}
+    <label for="{{ form.username.id_for_label }}" class="form-label fs-6 pt-1">Username:</label>
+    {{ form.username }}
+    {{ form.username.errors }}
   </div>
   <div class="mb-3">
-    <label for="{{ login_form.password.id_for_label }}" class="form-label fs-6">{{ login_form.password.label_tag }}</label>
-    {{ login_form.password }}
+    <label for="{{ form.password.id_for_label }}" class="form-label fs-6">Password:</label>
+    {{ form.password }}
+    {{ form.password.errors }}
     <div id="emailHelp" class="form-text">
     <a href="#">
       Forgot password?
     </a>
     </div>
   </div>
-
+  <div class="my-3 bg-danger text-white fs-6 rounded">
+    {% if form.errors %}
+      <div class="px-2">
+        Your username and password didn't match. Please try again.
+        {{ form.errors }}
+      </div>
+    {% endif %}
+  </div>
   <div class="d-flex justify-content-center mb-3">
     <input type="submit" class="btn btn-outline-success shadow-sm" value="Log in">
+    <input type="hidden" name="next" value="{{ next }}">
   </div>
 </form>
