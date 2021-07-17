@@ -7,22 +7,30 @@
     min-width: auto;
   }
   </style>
-  <div class="col-md-9">
-    <div class="container theme-gr-mc rounded-bottom shadow py-1">
-      <div class="border-bottom p-1">
+  <div class="col-md">
+    <div class="p-1 pt-2 px-3 navbar navbar-expand-md theme-lightgreen-header navbar-dark container theme-hidden-top">
         <h2>Profile info</h2>
+        <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSettings" aria-controls="navbarSettings" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSettings">
+      <div class="navbar-nav">
+        {% include 'sitepages/profile/toggledsidebar.html'%}
       </div>
-      <div class="d-flex flex-row pb-3">
-        <div class="d-flex flex-column border-end px-3 theme-gr-sc">
-          <div class="fw-bold d-flex justify-content-center pt-2">
+    </div>
+    <div class="container theme-lightgreen-container rounded-bottom shadow">
+      <div class="d-flex flex-row">
+        <div class="d-flex flex-column pe-4 py-2">
+          <div class="fw-bold d-flex justify-content-center">
             {{ user.username }}
           </div>
           <div class="py-2">
             <img src="{% static 'APIapp/user.png' %}" class="img-thumbnail rounded-circle avatar" alt="">
           </div>
         </div>
-        <div class="container-fluid px-3 theme-gr-sc">
-          <div class="d-inline-flex flex-column pt-2 ">
+        <div class="container-fluid px-3 my-2">
+          <div class="d-inline-flex flex-column pt-2">
             <div>
               <strong>Email:</strong> {{ user.email }}
             </div>
@@ -37,21 +45,23 @@
       </div>
     </div>
 
-    <div class="container theme-gr-mc rounded shadow my-2 py-1">
-      <div class="border-bottom p-1">
-        <h2>Heroes</h2>
-      </div>
+    <div class="p-1 mt-2 px-3 container theme-lightgreen-header rounded-top">
+      <h2>Heroes</h2>
+    </div>
+    <div class="container theme-lightgreen-container rounded-bottom shadow py-1">
+      abc
     </div>
 
-    <div class="container theme-gr-mc rounded shadow my-2 py-1">
-      <div class="border-bottom p-1">
-        <h2>Achievements</h2>
-      </div>
+    <div class="p-1 mt-2 px-3 container theme-lightgreen-header rounded-top">
+      <h2>Achievements</h2>
+    </div>
+    <div class="container theme-lightgreen-container rounded-bottom shadow py-1">
+      abc
     </div>
 
   </div>
   <div class="col-md-3 d-none d-sm-none d-md-block">
-    {% include 'sitesidebar/sidebar.html' with sidebar_content='sitepages/profile/sidebar.html' title='Profile management' theme='theme-gr-mc'%}
+    {% include 'sitesidebar/sidebar.html' with sidebar_content='sitepages/profile/sidebar.html' title='Profile management' theme='lightgreen'%}
   </div>
 {% endblock %}
 
