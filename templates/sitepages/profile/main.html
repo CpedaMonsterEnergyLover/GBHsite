@@ -2,66 +2,46 @@
 {% load static %}
 {% block content %}
   <style>
-  .avatar {
-    max-height: 150px;
-    min-width: auto;
+  .badge-text {
+    text-shadow: none;
+    color: black;
   }
   </style>
-  <div class="col-md">
-    <div class="p-1 pt-2 px-3 navbar navbar-expand-md theme-lightgreen-header navbar-dark container theme-hidden-top">
-        <h2>Profile info</h2>
-        <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSettings" aria-controls="navbarSettings" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-    <div class="collapse navbar-collapse" id="navbarSettings">
-      <div class="navbar-nav">
-        {% include 'sitepages/profile/toggledsidebar.html'%}
-      </div>
-    </div>
-    <div class="container theme-lightgreen-container rounded-bottom shadow">
-      <div class="d-flex flex-row">
-        <div class="d-flex flex-column pe-4 py-2">
-          <div class="fw-bold d-flex justify-content-center">
-            {{ user.username }}
-          </div>
-          <div class="py-2">
-            <img src="{% static 'APIapp/user.png' %}" class="img-thumbnail rounded-circle avatar" alt="">
-          </div>
-        </div>
-        <div class="container-fluid px-3 my-2">
-          <div class="d-inline-flex flex-column pt-2">
-            <div>
-              <strong>Email:</strong> {{ user.email }}
-            </div>
-            <div>
-              <strong>Registration date:</strong> {{ user.date_joined }}
-            </div>
-            <div>
-              Something else...
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="p-1 mt-2 px-3 container theme-lightgreen-header rounded-top">
-      <h2>Heroes</h2>
-    </div>
-    <div class="container theme-lightgreen-container rounded-bottom shadow py-1">
-      abc
-    </div>
+<div class="col-3 d-none {% comment %}d-sm-none{% endcomment %} d-lg-block page-column-position">
+  {% include 'sitepages/profile/sidebar.html'%}
+</div>
 
-    <div class="p-1 mt-2 px-3 container theme-lightgreen-header rounded-top">
-      <h2>Achievements</h2>
-    </div>
-    <div class="container theme-lightgreen-container rounded-bottom shadow py-1">
-      abc
-    </div>
+<div class="col page-column-position">
 
+  <div class="p-1 pt-2 px-3 navbar navbar-expand-md theme-lightgreen-header navbar-dark container rounded-top">
+      <h2>Player statistics</h2>
+      <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSettings" aria-controls="navbarSettings" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
   </div>
-  <div class="col-md-3 d-none d-sm-none d-md-block">
-    {% include 'sitesidebar/sidebar.html' with sidebar_content='sitepages/profile/sidebar.html' title='Profile management' theme='lightgreen'%}
+  <div class="collapse navbar-collapse" id="navbarSettings">
+    <div class="navbar-nav">
+      {% include 'sitepages/profile/toggledsidebar.html'%}
+    </div>
   </div>
+  {% include 'sitepages/profile/statistics.html' %}
+
+  <div class="container-fluid theme-lightgreen-header py-1">
+      <h4 class="">Total games played</h4>
+  </div>
+  {% include 'sitepages/profile/totalgamesplayed.html' %}
+
+  <div class="p-1 mt-3 px-3 container theme-lightgreen-header rounded-top">
+    <h2>Heroes</h2>
+  </div>
+  {% include 'sitepages/profile/heroes.html' %}
+
+  <div class="p-1 mt-3 px-3 container theme-lightgreen-header rounded-top">
+    <h2>Achievements</h2>
+  </div>
+  <div class="container theme-lightgreen-container rounded-bottom shadow py-1">
+    abc
+  </div>
+</div>
 {% endblock %}
-
