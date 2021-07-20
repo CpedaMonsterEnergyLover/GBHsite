@@ -42,11 +42,27 @@
         Profile management
       </div>
       <hr>
-      {% include 'sitesidebar/element.html' with option='Account settings' url='/profile/settings'%}
-      {% include 'sitesidebar/element.html' with option='Edit profile' %}
-      {% include 'sitesidebar/element.html' with option='Purchase history' %}
+
+
+      {% if active_settings %}
+        {% include 'sitesidebar/element.html' with option='Account settings' url='/profile/settings' active=True%}
+      {% else %}
+        {% include 'sitesidebar/element.html' with option='Account settings' url='/profile/settings'%}
+      {% endif %}
+
+      {% if active_purchase %}
+        {% include 'sitesidebar/element.html' with option='Purchase history' active=True%}
+      {% else %}
+        {% include 'sitesidebar/element.html' with option='Purchase history' %}
+      {% endif %}
+
+
       <hr>
-      {% include 'sitesidebar/element.html' with option='Log out' url='/profile/logout' %}
+      {% if has_back %}
+        {% include 'sitesidebar/element.html' with option='Back to profile' url='/profile' %}
+      {% else %}
+        {% include 'sitesidebar/element.html' with option='Log out' url='/profile/logout' %}
+      {% endif %}
     </ul>
 </div>
 
