@@ -30,11 +30,16 @@ class SignUpForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'form-control bg-light'})
-        self.fields['password'].widget.attrs.update({'class': 'form-control bg-light'})
-        self.fields['password_confirm'].widget.attrs.update({'class': 'form-control bg-light'})
-        self.fields['email'].widget.attrs.update({'class': 'form-control bg-light'})
-        self.fields['birthday'].widget.attrs.update({'class': 'form-control bg-light'})
+        self.fields['username'].widget.attrs.update(
+            {'class': 'form-control border-secondary', 'style': 'background-color: #353B40;color: #efefef;'})
+        self.fields['password'].widget.attrs.update(
+            {'class': 'form-control border-secondary', 'style': 'background-color: #353B40;color: #efefef;'})
+        self.fields['password_confirm'].widget.attrs.update(
+            {'class': 'form-control border-secondary', 'style': 'background-color: #353B40;color: #efefef;'})
+        self.fields['email'].widget.attrs.update(
+            {'class': 'form-control border-secondary', 'style': 'background-color: #353B40;color: #efefef;'})
+        self.fields['birthday'].widget.attrs.update(
+            {'class': 'form-control border-secondary', 'style': 'background-color: #353B40;color: #efefef;'})
 
 
 class UserLoginForm(AuthenticationForm):
@@ -43,5 +48,7 @@ class UserLoginForm(AuthenticationForm):
 
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'form-control bg-light'})
-        self.fields['password'].widget.attrs.update({'class': 'form-control bg-light'})
+        self.fields['username'].widget.attrs.update(
+            {'class': 'form-control border-secondary', 'style': 'background-color: #353B40;color: #efefef;'})
+        self.fields['password'].widget.attrs.update(
+            {'class': 'form-control border-secondary', 'style': 'background-color: #353B40;color: #efefef;'})

@@ -1,0 +1,48 @@
+<style>
+  .achievement-card{
+    border: black 2px solid;
+    border-radius: 5px;
+    min-height: 50px;
+    min-width: 50px;
+    max-height: 50px;
+    max-width: 50px;
+    background-position: center center;
+    background-size: cover;
+    box-shadow: inset 0 0 10px black;
+  }
+  .popover-header {
+    text-align: center;
+    color: #efefef;
+    background-color: rgb(30, 30, 37);
+    border: black 1px solid;
+      z-index: 1;
+  }
+  .popover-body {
+    text-align: center;
+    color: #efefef;
+    background-color: rgb(36, 39, 47);
+    border: black 1px solid;
+  }
+  .popover-arrow{
+      visibility: hidden;
+  }
+  .hidden {
+    display: none;
+  }
+</style>
+  <div class="achievement-card m-1"
+     style="background-image: url(https://png.pngtree.com/png-clipart/20191017/ourlarge/pngtree-3d-yellow-star-icon-png-image_1772864.jpg);"
+     href="#" data-toggle="popover" data-trigger="manual"
+     data-popover-content="#a1" tabindex="0">
+    <div class="hidden" id="a1">
+      <div class="popover-heading">
+        <strong>
+          Achievement name
+        </strong>
+      </div>
+      <div class="popover-body">
+        <p><i>Description Lorem ipsum dolor sit amet, consectetur adipisicing elit. A doloribus ducimus facere incidunt, nemo provident quaerat quos saepe tenetur totam?</i></p>
+        <p>Achieved in 20.02.2020</p>
+      </div>
+    </div>
+  </div>

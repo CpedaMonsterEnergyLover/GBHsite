@@ -1,0 +1,43 @@
+<div class="container theme-container rounded-bottom shadow py-2">
+  <div class="d-flex flex-row justify-content-between pb-1">
+    <div>
+      <span class="badge bg-success badge-pill badge-text">75</span>
+      Solo
+    </div>
+    <div>
+      Group
+      <span class="badge bg-warning badge-pill list-item badge-text">25</span>
+    </div>
+  </div>
+  <div class="progress" style="height: 30px; font-size: 16px;">
+    <div class="progress-bar bg-success fw-bold badge-text" role="progressbar" style="width: 75%; min-width:45px" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+    <div class="progress-bar bg-warning fw-bold badge-text" role="progressbar" style="width: 25%; min-width:45px" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100">25%</div>
+  </div>
+<hr class="text-light">
+<div class="row">
+  <div class="col">
+    <ul class="list-group list-group-flush">
+      <div class="text-center fw-bold text-success">Solo</div>
+      {% include 'sitepages/profile/statistics/listitem.html' with text='Games played' color="success" value=75%}
+      {% include 'sitepages/profile/statistics/listitem.html' with text='Floors passed' color="success" value=864%}
+      {% include 'sitepages/profile/statistics/listitem.html' with text='Monsters killed' color="success" value=142536%}
+      {% include 'sitepages/profile/statistics/listitem.html' with text='Max. floor reached (chaos)' color="success" value=76%}
+      {% include 'sitepages/profile/statistics/listitem.html' with text='Max. floor reached (normal)' color="success" value=45%}
+    </ul>
+  </div>
+  <div class="col">
+    <div class="text-center fw-bold text-warning">Group</div>
+    <ul class="list-group list-group-flush">
+      {% include 'sitepages/profile/statistics/listitem.html' with text='Games played' color="warning" value=25 reverse=True%}
+      {% include 'sitepages/profile/statistics/listitem.html' with text='Floors passed' color="warning" value=100 reverse=True%}
+      {% include 'sitepages/profile/statistics/listitem.html' with text='Monsters killed' color="warning" value=64556 reverse=True%}
+      {% include 'sitepages/profile/statistics/listitem.html' with text='Max. floor reached (chaos)' color="warning" value=56 reverse=True%}
+      {% include 'sitepages/profile/statistics/listitem.html' with text='Max. floor reached (normal)' color="warning" value=35 reverse=True%}
+      {% include 'sitepages/profile/statistics/listitem.html' with text='Total damage healed' color="warning" value=200 reverse=True%}
+      {% include 'sitepages/profile/statistics/listitem.html' with text='Total damage absorbed' color="warning" value=43 reverse=True%}
+    </ul>
+  </div>
+</div>
+
+
+</div>

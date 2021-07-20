@@ -1,0 +1,37 @@
+<div class="container theme-container shadow py-1">
+  Тут будет таблица открытых героев...
+</div>
+<div class="container-fluid theme-header py-1">
+  <h4 class="">Favourite heroes & roles</h4>
+</div>
+<div class="container theme-container shadow py-1 rounded-bottom">
+  <h5 class="pt-2">Top 5 most-played heroes (solo)</h5>
+  <div class="row row-cols-5 justify-content-center" style="min-height: 160px">
+  {% include 'sitepages/profile/statistics/herocard.html' with image="https://i.pinimg.com/236x/d9/e1/27/d9e127783e1cb3a2ee997103fb7e5371--character-illustration-female-characters.jpg"%}
+  {% include 'sitepages/profile/statistics/herocard.html' with image="https://i.pinimg.com/236x/d9/e1/27/d9e127783e1cb3a2ee997103fb7e5371--character-illustration-female-characters.jpg"%}
+  {% include 'sitepages/profile/statistics/herocard.html' with image="https://i.pinimg.com/236x/d9/e1/27/d9e127783e1cb3a2ee997103fb7e5371--character-illustration-female-characters.jpg"%}
+  {% include 'sitepages/profile/statistics/herocard.html' with image="https://i.pinimg.com/236x/d9/e1/27/d9e127783e1cb3a2ee997103fb7e5371--character-illustration-female-characters.jpg"%}
+  {% include 'sitepages/profile/statistics/herocard.html' with image="https://i.pinimg.com/236x/d9/e1/27/d9e127783e1cb3a2ee997103fb7e5371--character-illustration-female-characters.jpg"%}
+  </div>
+  <hr class="text-light">
+  <h5>Top 5 most-played heroes (group)</h5>
+  <div class="row row-cols-5 justify-content-center" style="min-height: 160px">
+  {% include 'sitepages/profile/statistics/herocard.html' with image="https://i.pinimg.com/564x/63/fd/0d/63fd0d9313204402381a12758bc5043a.jpg"%}
+  {% include 'sitepages/profile/statistics/herocard.html' with image="https://i.pinimg.com/564x/63/fd/0d/63fd0d9313204402381a12758bc5043a.jpg"%}
+  {% include 'sitepages/profile/statistics/herocard.html' with image="https://i.pinimg.com/564x/63/fd/0d/63fd0d9313204402381a12758bc5043a.jpg"%}
+  {% include 'sitepages/profile/statistics/herocard.html' with image="https://i.pinimg.com/564x/63/fd/0d/63fd0d9313204402381a12758bc5043a.jpg"%}
+  {% include 'sitepages/profile/statistics/herocard.html' with image="https://i.pinimg.com/564x/63/fd/0d/63fd0d9313204402381a12758bc5043a.jpg"%}
+  </div>
+  <hr class="text-light">
+  <h5>Roles played in group mode</h5>
+  <div class="d-flex flex-row justify-content-start pb-1">
+    <div><span class="badge bg-danger badge-pill badge-text mx-1">Healer</span></div>
+    <div><span class="badge bg-warning badge-pill list-item badge-text mx-1">DPS</span></div>
+    <div><span class="badge bg-success badge-pill list-item badge-text mx-1">Tank</span></div>
+  </div>
+  <div class="progress mb-3" style="height: 30px; font-size: 16px;">
+    <div class="progress-bar bg-danger fw-bold badge-text" role="progressbar" style="width: 33%; min-width:45px" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">33%</div>
+    <div class="progress-bar bg-warning fw-bold badge-text" role="progressbar" style="width: 34%; min-width:45px" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">33%</div>
+    <div class="progress-bar bg-success fw-bold badge-text" role="progressbar" style="width: 34%; min-width:45px" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100">34%</div>
+  </div>
+</div>
