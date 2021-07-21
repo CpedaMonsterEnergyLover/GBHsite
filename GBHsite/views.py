@@ -1,8 +1,8 @@
-from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.shortcuts import render
+
+from .utils import *
 from .forms import *
 from django.shortcuts import redirect
 
@@ -34,41 +34,98 @@ def signup(request):
     return render(request, 'sitepages/signup/main.html', {'signup_form': signup_form})
 
 
+@login_required
 def settings(request):
     change_username_form = ChangeUsernameForm(user=request.user)
     change_password_form = ChangePasswordForm(user=request.user)
     change_email_form = ChangeEmailForm(user=request.user)
     if request.method == 'POST':
-        if 'submit_password' in request.POST:
-            change_password_form = ChangePasswordForm(user=request.user, data=request.POST or None)
-
+        # username form
         if 'submit_username' in request.POST:
             change_username_form = ChangeUsernameForm(user=request.user, data=request.POST or None)
             if change_username_form.is_valid():
-                return render_settings(request, change_username_form, change_password_form, change_email_form,
-                                       {'username_changed': True})
-            else:
-                return render_settings(request, change_username_form, change_password_form, change_email_form, None)
+                user = User.objects.get(username=request.user.username)
+                user.username = change_username_form.cleaned_data.get('username')
+                user.save()
+                return redirect('settings/redirect-success/username_changed/')
 
+        # password form
+        if 'submit_password' in request.POST:
+            change_password_form = ChangePasswordForm(user=request.user, data=request.POST or None)
+            if change_password_form.is_valid():
+                # TODO: send a letter to confirm an email
+                user = User.objects.get(username=request.user.username)
+                user.set_password(change_password_form.cleaned_data.get('new_password'))
+                user.save()
+                return render(request, 'sitepages/profile/settings/main.html',
+                              {'username_form': change_username_form,
+                               'password_form': ChangePasswordForm(user=request.user),
+                               'email_form': change_email_form, 'password_changed': True})
+        # email form
         if 'submit_email' in request.POST:
             change_email_form = ChangeEmailForm(user=request.user, data=request.POST or None)
+            if change_email_form.is_valid():
+                # TODO: send a letter to confirm an email
+                user = User.objects.get(username=request.user.username)
+                user.email = change_email_form.cleaned_data.get('email')
+                user.save()
+                return render(request, 'sitepages/profile/settings/main.html',
+                              {'username_form': change_username_form,
+                               'password_form': change_password_form,
+                               'email_form': ChangeEmailForm(user=request.user), 'email_changed': True})
 
-    return render_settings(request, change_username_form, change_password_form, change_email_form, None)
+    return render(request, 'sitepages/profile/settings/main.html',
+                  {'username_form': change_username_form,
+                   'password_form': change_password_form,
+                   'email_form': change_email_form})
+
+
+@login_required
+def redirect_success(request, action):
+    return render(request, 'sitepages/profile/settings/main.html',
+                  {'username_form': ChangeUsernameForm(user=request.user),
+                   'password_form': ChangePasswordForm(user=request.user),
+                   'email_form': ChangeEmailForm(user=request.user),
+                   action: True})
 
 
 @login_required
 def profile(request):
-    return render(request, 'sitepages/profile/main.html')
+    user = request.user
+    stat = user.statistics
+    exp = request.user.profile.experience
+    # level
+    level = calc_level(exp)
+    max_level = False
+    if exp >= 100000:
+        level = 100
+        max_level = True
+    # sidebar exp
+    left_exp = calc_left_exp(exp)
+    percent = left_exp // 10
+    # total games played
+    solo_games = stat.solo.games_played
+    group_games = stat.group.games_played
+    total_games = solo_games + group_games
+    solo_percent = 0
+    group_percent = 0
+    if total_games > 0:
+        solo_percent = int(round(solo_games / total_games * 100))
+        group_percent = 100 - solo_percent
+    return render(request, 'sitepages/profile/main.html', {
+        'level': level,
+        'exp': left_exp,
+        'percent': percent,
+        'solo_games': solo_games,
+        'group_games': group_games,
+        'max_level': max_level,
+        'solo_percent': solo_percent,
+        'group_percent': group_percent,
+        'total_games': total_games,
+    })
 
 
 @login_required
 def logout_user(request):
     logout(request)
     return redirect('/')
-
-
-def render_settings(request, uf, pf, ef, arg):
-    d = {'username_form': uf, 'password_form': pf, 'email_form': ef}
-    if arg is not None:
-        d[arg[1]] = arg[2]
-    return render(request, 'sitepages/profile/settings/main.html', d)

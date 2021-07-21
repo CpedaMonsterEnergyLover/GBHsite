@@ -3,10 +3,10 @@
       <div class="row">
         <div class="col">
           <ul class="list-group list-group-flush">
-            {% include 'sitepages/profile/statistics/listitem.html' with text='Total hours played' color="primary" value=1546%}
-            {% include 'sitepages/profile/statistics/listitem.html' with text='Total games played' color="primary" value=231%}
-            {% include 'sitepages/profile/statistics/listitem.html' with text='Total ardor points' color="primary" value=140%}
-            {% include 'sitepages/profile/statistics/listitem.html' with text='Dice rolled' color="primary" value=18954%}
+            {% include 'sitepages/profile/statistics/listitem.html' with text='Total hours played' color="primary" value=user.statistics.total_hours_played%}
+            {% include 'sitepages/profile/statistics/listitem.html' with text='Total games played' color="primary" value=total_games%}
+            {% include 'sitepages/profile/statistics/listitem.html' with text='Total ardor points' color="primary" value=user.statistics.total_ardor_points%}
+            {% include 'sitepages/profile/statistics/listitem.html' with text='Dice rolled' color="primary" value=user.statistics.dice_rolled%}
           </ul>
         </div>
         <div class="col">

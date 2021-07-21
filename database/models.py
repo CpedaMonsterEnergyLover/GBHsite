@@ -39,6 +39,8 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)
+    experience = models.IntegerField(null=False, blank=False, default=0)
+    ardor = models.IntegerField(null=False, blank=False, default=0)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -48,3 +50,67 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
+
+
+class Statistics(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    solo = models.OneToOneField('SoloData', on_delete=models.CASCADE, null=True)
+    group = models.OneToOneField('GroupData', on_delete=models.CASCADE, null=True)
+    total_hours_played = models.BigIntegerField(default=0, null=False, blank=False)
+    total_ardor_points = models.BigIntegerField(default=0, null=False, blank=False)
+    dice_rolled = models.BigIntegerField(default=0, null=False, blank=False)
+
+    @receiver(post_save, sender=User)
+    def create_statistic(sender, instance, created, **kwargs):
+        if created:
+            Statistics.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_statistic(sender, instance, **kwargs):
+        instance.statistics.save()
+
+    # @receiver(post_save, sender='database.SoloData')
+    # def add_games_played(sender, instance, **kwargs):
+    #     stat = Statistics.objects.get(solo=instance)
+    #     stat.total_games_played = instance.games_played
+    #     stat.save()
+
+
+class SoloData(models.Model):
+    statistics_link = models.OneToOneField(Statistics, on_delete=models.CASCADE)
+    games_played = models.IntegerField(default=0, null=False, blank=False)
+    floors_passed = models.BigIntegerField(default=0, null=False, blank=False)
+    monsters_killed = models.BigIntegerField(default=0, null=False, blank=False)
+    max_floor_normal = models.IntegerField(default=0, null=False, blank=False)
+    max_floor_chaos = models.IntegerField(default=0, null=False, blank=False)
+
+    @receiver(post_save, sender=Statistics)
+    def create_solo_data(sender, instance, created, **kwargs):
+        if created:
+            created_data = SoloData.objects.create(statistics_link=instance)
+            instance.solo = created_data
+
+    @receiver(post_save, sender=Statistics)
+    def save_solo_data(sender, instance, **kwargs):
+        instance.solo.save()
+
+
+class GroupData(models.Model):
+    statistics_link = models.OneToOneField(Statistics, on_delete=models.CASCADE)
+    games_played = models.IntegerField(default=0, null=False, blank=False)
+    floors_passed = models.BigIntegerField(default=0, null=False, blank=False)
+    monsters_killed = models.BigIntegerField(default=0, null=False, blank=False)
+    max_floor_normal = models.IntegerField(default=0, null=False, blank=False)
+    max_floor_chaos = models.IntegerField(default=0, null=False, blank=False)
+    total_damage_healed = models.IntegerField(default=0, null=False, blank=False)
+    total_damage_absorbed = models.IntegerField(default=0, null=False, blank=False)
+
+    @receiver(post_save, sender=Statistics)
+    def create_group_data(sender, instance, created, **kwargs):
+        if created:
+            created_data = GroupData.objects.create(statistics_link=instance)
+            instance.group = created_data
+
+    @receiver(post_save, sender=Statistics)
+    def save_group_data(sender, instance, **kwargs):
+        instance.group.save()

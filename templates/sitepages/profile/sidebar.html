@@ -12,7 +12,7 @@
     max-height: 1px;
     position: relative;
     bottom: 110px;
-    left: 180px;
+    left: 250px;
     text-shadow: 3px 3px 5px rgb(0, 0, 0);
       font-size: 3.2rem;
   }
@@ -22,17 +22,31 @@
   <div class="py-2">
     <div class="d-flex flex-column">
       <div>
-        <div class="text-light username">
-          {{ user.username }}
+        <div class="username">
+          <div class="text-light text-start">
+            {{ user.username }}
+          </div>
         </div>
       </div>
       <div  style="max-height: 100px">
-        <img src="{% static 'APIapp/user.png' %}" class="img-thumbnail rounded-circle avatar avatar-position shadow-lg" alt="">
+        <img src="{% static 'APIapp/user.png' %}" class="rounded-circle avatar avatar-position shadow-lg" alt="">
       </div>
-      <div>Уровень</div>
-      <div>Полоска</div>
-      <strong class="fs-6">Last seen online:</strong> {{ user.last_login }}
-      <strong class="fs-6">Registration date:</strong> {{ user.date_joined }}
+      <div {% if max_level %}class="rounded-3 my-1 fw-bold text-white"
+           style="background-color: goldenrod; box-shadow: goldenrod 0 0 10px; border: darkgoldenrod 2px solid" {% endif %}>
+        Level {{ level }}
+      </div>
+      {% if not max_level %}
+      <div>{{ exp }}/1000 exp</div>
+      <div class="progress my-1" style="height: 10px">
+        <div class="progress-bar bg-primary fw-bold badge-text" role="progressbar" style="width: {{ percent }}%" aria-valuenow="{{ percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      {% endif %}
+      <div class="flex-row">
+        <strong class="fs-6">Registration date:</strong> {{ user.date_joined.date }}
+      </div>
+      <div class="flex-row">
+        <strong class="fs-6">Email:</strong> {{ user.email }}
+      </div>
     </div>
   </div>
 </div>
@@ -42,21 +56,16 @@
         Profile management
       </div>
       <hr>
-
-
       {% if active_settings %}
         {% include 'sitesidebar/element.html' with option='Account settings' url='/profile/settings' active=True%}
       {% else %}
         {% include 'sitesidebar/element.html' with option='Account settings' url='/profile/settings'%}
       {% endif %}
-
       {% if active_purchase %}
         {% include 'sitesidebar/element.html' with option='Purchase history' active=True%}
       {% else %}
         {% include 'sitesidebar/element.html' with option='Purchase history' %}
       {% endif %}
-
-
       <hr>
       {% if has_back %}
         {% include 'sitesidebar/element.html' with option='Back to profile' url='/profile' %}

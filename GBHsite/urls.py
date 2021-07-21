@@ -14,5 +14,6 @@ urlpatterns = [
                                                redirect_field_name='/db')),
     path('profile', views.profile),
     path('profile/settings', views.settings),
-    path('profile/logout', views.logout_user)
+    path('profile/logout', views.logout_user),
+    path('profile/settings/redirect-success/<str:action>/', views.redirect_success)
 ]

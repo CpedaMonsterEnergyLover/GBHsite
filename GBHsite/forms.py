@@ -2,32 +2,37 @@ from datetime import datetime
 
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_slug
 
 
 class SignUpForm(forms.Form):
-    username = forms.CharField(label='Username', max_length=14, min_length=3, initial='')
+    username = forms.CharField(label='Username', max_length=14, min_length=3, initial='', validators=[validate_slug])
     password = forms.CharField(label='Password', widget=forms.PasswordInput())
     password_confirm = forms.CharField(label='Confirm password', widget=forms.PasswordInput())
     email = forms.EmailField(label='Email', initial='')
-    birthday = forms.CharField(label='Date of birth', initial=datetime.now().strftime("%Y-%m-%d"), widget=forms.SelectDateWidget(
-        years=range(1922, 2022)))
+    birthday = forms.CharField(label='Date of birth', initial=datetime.now().strftime("%Y-%m-%d"),
+                               widget=forms.SelectDateWidget(
+                               years=range(1922, 2022)))
 
     def clean(self):
         cleaned_data = super(SignUpForm, self).clean()
         # password validation
         password = cleaned_data.get("password")
-        # password_validation.validate_password(password)
+        # TODO: password_validation.validate_password(password)
         confirm_password = cleaned_data.get("password_confirm")
         if password != confirm_password:
-            raise ValidationError(
-                "Password and confirm password does not match"
-            )
+            raise ValidationError({'confirm_password': ['Passwords do not match']})
         # date validation
-        date = self.cleaned_data.get("birthday")
+        date = cleaned_data.get("birthday")
         birthday = datetime.strptime(date, "%Y-%m-%d").date()
         if birthday >= datetime.date(datetime.now()):
             raise forms.ValidationError("Enter a valid date of birth")
+        # username exists validation
+        username = cleaned_data.get("username")
+        if User.objects.filter(username=cleaned_data['username']).exists():
+            raise ValidationError({'username': ['This username is already taken']})
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
@@ -57,15 +62,18 @@ class UserLoginForm(AuthenticationForm):
 
 class ChangeUsernameForm(forms.Form):
     password = forms.CharField(label='Password', widget=forms.PasswordInput())
-    username = forms.CharField(label='Username', max_length=14, min_length=3, initial='')
+    username = forms.CharField(label='Username', max_length=14, min_length=3, initial='', validators=[validate_slug])
 
     def clean(self):
         cleaned_data = super(ChangeUsernameForm, self).clean()
         # password check
-        password = self.cleaned_data.get("password")
+        password = cleaned_data.get("password")
         if not self.user.check_password(password):
             raise ValidationError({'password': ['Invalid password']})
-        # username validation
+        # username exists validation
+        username = cleaned_data.get("username")
+        if User.objects.filter(username=username).exists():
+            raise ValidationError('This username is already taken')
 
     def __init__(self, user, data=None):
         self.user = user
@@ -84,10 +92,15 @@ class ChangePasswordForm(forms.Form):
     def clean(self):
         cleaned_data = super(ChangePasswordForm, self).clean()
         # password check
-        password = self.cleaned_data.get("password")
+        password = cleaned_data.get("password")
         if not self.user.check_password(password):
             raise ValidationError({'password': ['Invalid password']})
         # password validation
+        # TODO: password_validation.validate_password(password)
+        new_password = cleaned_data.get("new_password")
+        confirm_password = cleaned_data.get("confirm_password")
+        if new_password != confirm_password:
+            raise ValidationError({'confirm_password': ['Passwords do not match']})
 
     def __init__(self, user, data=None):
         self.user = user
@@ -107,10 +120,12 @@ class ChangeEmailForm(forms.Form):
     def clean(self):
         cleaned_data = super(ChangeEmailForm, self).clean()
         # password check
-        password = self.cleaned_data.get("password")
+        password = cleaned_data.get("password")
         if not self.user.check_password(password):
             raise ValidationError({'password': ['Invalid password']})
-        # email validation
+        # email exists validation
+        if User.objects.filter(email=cleaned_data.get('email')).exists():
+            raise forms.ValidationError({'email': ['This email is taken']})
 
     def __init__(self, user, data=None):
         self.user = user
