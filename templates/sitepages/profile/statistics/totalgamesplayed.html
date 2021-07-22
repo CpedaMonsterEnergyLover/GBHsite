@@ -19,8 +19,8 @@
     <hr class="text-light">
     <div class="row">
       <div class="col">
+        <div class="text-center fw-bold text-success">Solo</div>
         <ul class="list-group list-group-flush">
-          <div class="text-center fw-bold text-success">Solo</div>
           {% include 'sitepages/profile/statistics/listitem.html' with text='Games played' color="success" value=user.statistics.solo.games_played%}
           {% include 'sitepages/profile/statistics/listitem.html' with text='Floors passed' color="success" value=user.statistics.solo.floors_passed%}
           {% include 'sitepages/profile/statistics/listitem.html' with text='Monsters killed' color="success" value=user.statistics.solo.monsters_killed%}
