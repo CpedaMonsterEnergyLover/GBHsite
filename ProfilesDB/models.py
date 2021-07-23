@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+import GameObjectsDB
+from GameObjectsDB import *
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -11,9 +14,10 @@ class Profile(models.Model):
     experience = models.IntegerField(null=False, blank=False, default=0)
     ardor = models.IntegerField(null=False, blank=False, default=0)
     money = models.BigIntegerField(null=False, blank=False, default=0)
-    heroes = models.ManyToManyField('Hero', through='ProfileHasHero')
-    achievements = models.ManyToManyField('Achievement', through='ProfileHasAchievement')
-    dice = models.ManyToManyField('Dice', through='ProfileHasDice')
+    heroes = models.ManyToManyField('GameObjectsDB.Hero', through='ProfileHasHero')
+    achievements = models.ManyToManyField('GameObjectsDB.Achievement', through='ProfileHasAchievement')
+    dice = models.ManyToManyField('GameObjectsDB.Dice', through='ProfileHasDice')
+    avatar = models.CharField(null=True, blank=True, default=None, max_length=200)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -83,98 +87,40 @@ class GroupData(models.Model):
         instance.group.save()
 
 
-class Hero(models.Model):
-    name = models.CharField(null=False, blank=False, max_length=100)
-    description = models.CharField(null=False, blank=False, max_length=500, default='no description')
-    base_health = models.IntegerField(null=False, default=1)
-    base_defense = models.IntegerField(null=False, default=1)
-    base_mana = models.IntegerField(null=False, default=1)
-    avatar = models.CharField(null=True, blank=True, max_length=200)
-    ROLE_TYPES = (
-        (1, 'dps'),
-        (2, 'healer'),
-        (3, 'tank')
-    )
-    role = models.IntegerField(blank=False, null=False, default=1, choices=ROLE_TYPES)
-    # Abilities
-    # stat_set
-
-
 class ProfileHasHero(models.Model):
     profile = models.ForeignKey('Profile', on_delete=models.DO_NOTHING)
-    hero = models.ForeignKey('Hero', on_delete=models.DO_NOTHING)
-    # TODO: make unique
+    hero = models.ForeignKey('GameObjectsDB.Hero', on_delete=models.DO_NOTHING)
     level = models.IntegerField(default=1)
     date_obtained = models.DateField(null=False, blank=False)
     times_played = models.IntegerField(default=0)
     group_played = models.IntegerField(default=0)
     solo_played = models.IntegerField(default=0)
-    equipment_weapon = models.ForeignKey('Equipment', on_delete=models.DO_NOTHING,
+    equipment_weapon = models.ForeignKey('GameObjectsDB.Equipment', on_delete=models.DO_NOTHING,
                                          related_name='%(class)s_weapon', blank=True, null=True)
-    equipment_body = models.ForeignKey('Equipment', on_delete=models.DO_NOTHING,
+    equipment_body = models.ForeignKey('GameObjectsDB.Equipment', on_delete=models.DO_NOTHING,
                                        related_name='%(class)s_body', blank=True, null=True)
-    equipment_trinket1 = models.ForeignKey('Equipment', on_delete=models.DO_NOTHING,
+    equipment_trinket1 = models.ForeignKey('GameObjectsDB.Equipment', on_delete=models.DO_NOTHING,
                                            related_name='%(class)s_trinket1', blank=True, null=True)
-    equipment_trinket2 = models.ForeignKey('Equipment', on_delete=models.DO_NOTHING,
+    equipment_trinket2 = models.ForeignKey('GameObjectsDB.Equipment', on_delete=models.DO_NOTHING,
                                            related_name='%(class)s_trinket2', blank=True, null=True)
     # chosen_abilities
 
 
 class ProfileHasAchievement(models.Model):
     profile = models.ForeignKey('Profile', on_delete=models.DO_NOTHING)
-    achievement = models.ForeignKey('Achievement', on_delete=models.DO_NOTHING)
+    achievement = models.ForeignKey('GameObjectsDB.Achievement', on_delete=models.DO_NOTHING)
     date_obtained = models.DateField(null=False, blank=False)
-
-
-class Achievement(models.Model):
-    name = models.CharField(null=False, blank=False, max_length=100)
-    description = models.CharField(null=False, blank=False, max_length=500, default='no description')
-    avatar = models.CharField(null=False, blank=False, max_length=200)
-    RARITY = (
-        (1, 'Common'),
-        (2, 'Uncommon'),
-        (3, 'Rare'),
-        (4, 'Epic'),
-        (5, 'Artifact'),
-        (6, 'Mythic'),
-    )
-    rarity = models.IntegerField(blank=False, null=False, choices=RARITY, default=RARITY[0])
-    ARDOR_ = (
-        (5, 'Common'),
-        (10, 'Uncommon'),
-        (15, 'Rare'),
-        (25, 'Epic'),
-        (50, 'Artifact'),
-        (100, 'Mythic'),
-    )
-    ardor = models.IntegerField(blank=False, null=False, choices=ARDOR_, default=ARDOR_[0])
-    rarity_html_tag = models.CharField(null=False, blank=False, max_length=15, default='common')
-
-
-class Dice(models.Model):
-    name = models.CharField(null=False, blank=False, max_length=100)
-    description = models.CharField(null=False, blank=False, max_length=500, default='no description')
 
 
 class ProfileHasDice(models.Model):
     profile = models.ForeignKey('Profile', on_delete=models.DO_NOTHING)
-    dice = models.ForeignKey('Dice', on_delete=models.DO_NOTHING)
+    dice = models.ForeignKey('GameObjectsDB.Dice', on_delete=models.DO_NOTHING)
     date_obtained = models.DateField(null=False, blank=False)
     times_played = models.IntegerField(default=0)
-    times_tolled = models.IntegerField(default=0)
-
-
-class Equipment(models.Model):
-    name = models.CharField(null=False, blank=False, max_length=100)
-    description = models.CharField(null=False, blank=True, max_length=500, default='no description')
-    level = models.IntegerField(default=1, blank=False)
-    EQUIPMENT_TYPES = (
-        (1, 'weapon'),
-        (2, 'body'),
-        (3, 'trinket'),
-        (None, 'None')
-    )
-    slot = models.IntegerField(blank=True, null=True, choices=EQUIPMENT_TYPES)
+    times_rolled = models.IntegerField(default=0)
+    combo_procs = models.IntegerField(default=0)
+    effect_procs = models.IntegerField(default=0)
+    level = models.IntegerField(default=1)
 
 
 class HeroesInline(admin.TabularInline):

@@ -11,6 +11,10 @@
 .hiddenoption{
     display: none;
 }
+.header_icon{
+  object-fit: cover;
+  object-position: center center;
+}
 </style>
 <nav class="navbar container-fluid navbar-expand-lg navbar-dark bg-dark" style="z-index: 1">
   <div class="container d-flex flex-wrap justify-content-center">
@@ -39,7 +43,15 @@
     </div>
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="{% static 'APIapp/user.png' %}" alt="" width="32" height="32" class="rounded-circle">
+        {% if user.is_authenticated %}
+          {% if user.profile.avatar %}
+            <img src="{{ user.profile.avatar }}" alt="" width="32" height="32" class="rounded-circle header_icon">
+          {% else %}
+            <img src="{% static 'ProfilesDB/user.png' %}" alt="" width="32" height="32" class="rounded-circle header_icon">
+          {% endif %}
+        {% else %}
+          <img src="{% static 'ProfilesDB/user.png' %}" alt="" width="32" height="32" class="rounded-circle">
+        {% endif %}
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
        {% if user.is_authenticated %}

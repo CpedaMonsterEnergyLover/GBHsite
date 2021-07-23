@@ -2,7 +2,12 @@
 <style>
   .avatar {
     max-height: 200px;
+    max-width: 200px;
+    height: 200px;
+    width: 200px;
     min-width: auto;
+    object-position: center center;
+    object-fit: cover;
   }
   .avatar-position{
     position: relative;
@@ -29,7 +34,11 @@
         </div>
       </div>
       <div  style="max-height: 100px">
-        <img src="{% static 'APIapp/user.png' %}" class="rounded-circle avatar avatar-position shadow-lg" alt="">
+        {% if user.profile.avatar %}
+        <img src="{{ user.profile.avatar }}" class="img-thumbnail rounded-circle avatar avatar-position shadow-lg" alt="">
+        {% else %}
+        <img src="{% static 'ProfilesDB/user.png' %}" class="rounded-circle avatar avatar-position shadow-lg" alt="">
+        {% endif %}
       </div>
       <div {% if max_level %}class="rounded-3 my-1 fw-bold text-white"
            style="background-color: goldenrod; box-shadow: goldenrod 0 0 10px; border: darkgoldenrod 2px solid" {% endif %}>

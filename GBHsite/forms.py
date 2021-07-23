@@ -5,6 +5,9 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_slug
+from .utils import *
+
+from django.utils.translation import ugettext as _
 
 
 class SignUpForm(forms.Form):
@@ -14,16 +17,16 @@ class SignUpForm(forms.Form):
     email = forms.EmailField(label='Email', initial='')
     birthday = forms.CharField(label='Date of birth', initial=datetime.now().strftime("%Y-%m-%d"),
                                widget=forms.SelectDateWidget(
-                               years=range(1922, 2022)))
+                                   years=range(1922, 2022)))
 
     def clean(self):
         cleaned_data = super(SignUpForm, self).clean()
-        # password validation
+        # old_password validation
         password = cleaned_data.get("password")
         # TODO: password_validation.validate_password(password)
         confirm_password = cleaned_data.get("password_confirm")
         if password != confirm_password:
-            raise ValidationError({'confirm_password': ['Passwords do not match']})
+            raise ValidationError({'password': ['Passwords do not match']})
         # date validation
         date = cleaned_data.get("birthday")
         birthday = datetime.strptime(date, "%Y-%m-%d").date()
@@ -66,7 +69,7 @@ class ChangeUsernameForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(ChangeUsernameForm, self).clean()
-        # password check
+        # old_password check
         password = cleaned_data.get("password")
         if not self.user.check_password(password):
             raise ValidationError({'password': ['Invalid password']})
@@ -85,31 +88,31 @@ class ChangeUsernameForm(forms.Form):
 
 
 class ChangePasswordForm(forms.Form):
-    password = forms.CharField(label='Password', widget=forms.PasswordInput())
-    new_password = forms.CharField(label='New password', widget=forms.PasswordInput())
-    confirm_password = forms.CharField(label='Confirm new password', widget=forms.PasswordInput())
+    old_password = forms.CharField(label='Password', widget=forms.PasswordInput())
+    new_password1 = forms.CharField(label='New password', widget=forms.PasswordInput())
+    new_password2 = forms.CharField(label='Confirm new password', widget=forms.PasswordInput())
 
     def clean(self):
         cleaned_data = super(ChangePasswordForm, self).clean()
-        # password check
-        password = cleaned_data.get("password")
+        # old_password check
+        password = cleaned_data.get("old_password")
         if not self.user.check_password(password):
-            raise ValidationError({'password': ['Invalid password']})
-        # password validation
-        # TODO: password_validation.validate_password(password)
-        new_password = cleaned_data.get("new_password")
-        confirm_password = cleaned_data.get("confirm_password")
+            raise ValidationError({'old_password': ['Invalid password']})
+        # old_password validation
+        # TODO: password_validation.validate_password(old_password)
+        new_password = cleaned_data.get("new_password1")
+        confirm_password = cleaned_data.get("new_password2")
         if new_password != confirm_password:
-            raise ValidationError({'confirm_password': ['Passwords do not match']})
+            raise ValidationError({'new_password2   ': ['Passwords do not match']})
 
     def __init__(self, user, data=None):
         self.user = user
         super(ChangePasswordForm, self).__init__(data=data)
-        self.fields['password'].widget.attrs.update(
+        self.fields['old_password'].widget.attrs.update(
             {'class': 'form-control border-secondary', 'style': 'background-color: #353B40;color: #efefef;'})
-        self.fields['new_password'].widget.attrs.update(
+        self.fields['new_password1'].widget.attrs.update(
             {'class': 'form-control border-secondary', 'style': 'background-color: #353B40;color: #efefef;'})
-        self.fields['confirm_password'].widget.attrs.update(
+        self.fields['new_password2'].widget.attrs.update(
             {'class': 'form-control border-secondary', 'style': 'background-color: #353B40;color: #efefef;'})
 
 
@@ -119,13 +122,13 @@ class ChangeEmailForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(ChangeEmailForm, self).clean()
-        # password check
-        password = cleaned_data.get("password")
+        # old_password check
+        password = cleaned_data.get("old_password")
         if not self.user.check_password(password):
-            raise ValidationError({'password': ['Invalid password']})
+            raise ValidationError({'old_password': ['Invalid old_password']})
         # email exists validation
         if User.objects.filter(email=cleaned_data.get('email')).exists():
-            raise forms.ValidationError({'email': ['This email is taken']})
+            raise ValidationError({'email': ['This email is taken']})
 
     def __init__(self, user, data=None):
         self.user = user
@@ -134,3 +137,20 @@ class ChangeEmailForm(forms.Form):
             {'class': 'form-control border-secondary', 'style': 'background-color: #353B40;color: #efefef;'})
         self.fields['email'].widget.attrs.update(
             {'class': 'form-control border-secondary', 'style': 'background-color: #353B40;color: #efefef;'})
+
+
+class ChangeAvatarForm(forms.Form):
+    avatar = forms.URLField(label='New image URL', required=True, max_length=200, )
+
+    def clean(self):
+        cleaned_data = super(ChangeAvatarForm, self).clean()
+        url = cleaned_data.get('avatar')
+        if not valid_url_extension(url) or not valid_url_mimetype(url):
+            raise ValidationError(
+                {'avatar': ['Not a valid Image. The URL must have an image extensions (.jpg/.jpeg/.png)']})
+
+    def __init__(self, *args, **kwargs):
+        super(ChangeAvatarForm, self).__init__(*args, **kwargs)
+        self.fields['avatar'].widget.attrs.update(
+            {'class': 'form-control border-secondary', 'style': 'background-color: #353B40;color: #efefef;'})
+
