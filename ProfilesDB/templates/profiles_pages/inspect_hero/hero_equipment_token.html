@@ -1,0 +1,27 @@
+{% load static %}
+<div class="equipment-token m-1" style="background-image: url(
+    {% if object %}
+        {% if object.avatar %}
+          {{ object.avatar }}
+        {% else %}
+          https://www.kindpng.com/picc/m/609-6098768_free-png-question-mark-clipart-png-png-image.png
+        {% endif %}
+    {% else %}
+        {% static image %}
+    {% endif %}
+  );">
+   {% if object %}
+      <div class="d-flex flex-column hero-card-content text-center">
+        <div class="equip-name">{{ object.name }}</div>
+        <div class="equip-level"><span style="font-size: 50%">lvl</span>{{ object.level }}</div>
+      </div>
+      <div class="equip-stat-pip d-flex flex-row justify-content-evenly">
+        {% if object.health %}<div class="stat-pip" style="background-color: #B00000">{{ object.health }}</div>{% endif %}
+        {% if object.mana %}<div class="stat-pip" style="background-color: #2F2FC8">{{ object.mana }}</div>{% endif %}
+        {% if object.armor %}<div class="stat-pip" style="background-color: #808080">{{ object.armor }}</div>{% endif %}
+        {% if object.defense %}<div class="stat-pip" style="background-color: #E2E1E1">{{ object.defense }}</div>{% endif %}
+        {% if object.attack %}<div class="stat-pip" style="background-color: #D78231">{{ object.attack }}</div>{% endif %}
+        {% if object.spell %}<div class="stat-pip" style="background-color: #A32E9F">{{ object.spell }}</div>{% endif %}
+      </div>
+    {% endif %}
+</div>
