@@ -23,5 +23,4 @@ $(function () {
       $(this).popover('hide');
     })
   });
-
 });

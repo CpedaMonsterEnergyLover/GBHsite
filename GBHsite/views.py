@@ -84,7 +84,8 @@ def settings(request):
             'password_form': change_password_form,
             'email_form': change_email_form,
             'avatar_form': change_avatar_form}
-    data.update(sidebar_data(request.user))
+    data.update(sidebar_data(request.user, False))
+    data.update({'group': request.user.profile.group})
     return render(request, 'sitepages/profile/settings/main.html', data)
 
 
@@ -94,19 +95,27 @@ def redirect_success(request, action):
             'email_form': ChangeEmailForm(user=request.user),
             'avatar_form': ChangeAvatarForm(),
             action: True}
-    data.update(sidebar_data(request.user))
+    data.update(sidebar_data(request.user, False))
     return render(request, 'sitepages/profile/settings/main.html', data)
 
 
 @login_required
-def profile(request):
-    user = request.user
+def profile(request, name):
+    guest = False
+    group = None
+    if name == 'me' or name == request.user.username:
+        user_watching_on = request.user
+        group = request.user.profile.group
+    else:
+        guest = True
+        user_watching_on = User.objects.get(username=name)
     data = {}
-    data.update(sidebar_data(user))
-    data.update(dice_data(user))
-    data.update(stat_data(user))
-    data.update(hero_data(user))
-    data.update(achievements_data(user))
+    data.update(sidebar_data(user_watching_on, guest))
+    data.update(dice_data(user_watching_on))
+    data.update(stat_data(user_watching_on))
+    data.update(hero_data(user_watching_on))
+    data.update(achievements_data(user_watching_on))
+    data.update({'group': group})
     return render(request, 'sitepages/profile/main.html', data)
 
 

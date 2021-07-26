@@ -6,38 +6,51 @@
     height: 200px;
     width: 200px;
     min-width: auto;
-    object-position: center center;
-    object-fit: cover;
+    background-position: center center;
+    background-size: cover;
   }
   .avatar-position{
     position: relative;
-    bottom: 110px;
+    top: -100px;
   }
-  .username{
+  .username-div{
     max-height: 1px;
     position: relative;
-    bottom: 110px;
+    bottom: 125px;
     left: 250px;
-    text-shadow: 3px 3px 5px rgb(0, 0, 0);
-      font-size: 3.2rem;
+    font-size: 420%;
   }
+  .username-text {
+    color: #efefef;
+    text-align: left;
+    text-decoration: none;
+  }
+  .thumb-avatar{
+    border: #191d21 5px solid;
+    border-radius: 50%;
+  }
+  @supports (-webkit-text-stroke: 2px black) {
+  .username-text {
+    -webkit-text-stroke: 2px black;
+    -webkit-text-fill-color: #efefef;
+  }
+}
 </style>
-
-<div class="text-center theme-header container-fluid py-1 pt-2 rounded-top">
+<div class="text-center theme-header container-fluid py-1 pt-2 rounded">
   <div class="py-2">
     <div class="d-flex flex-column">
       <div>
-        <div class="username">
-          <div class="text-light text-start">
-            {{ user.username }}
-          </div>
+        <div class="username-div">
+          <a href="/profile/{{ username }}" class="username-text">
+            {{ username }}
+          </a>
         </div>
       </div>
-      <div  style="max-height: 100px">
-        {% if user.profile.avatar %}
-        <img src="{{ user.profile.avatar }}" class="img-thumbnail rounded-circle avatar avatar-position shadow-lg" alt="">
+      <div style="max-height: 100px" class="d-flex justify-content-center">
+        {% if avatar %}
+          <a href="/profile/{{ username }}"><div style="background-image: url({{ avatar }})" class="avatar thumb-avatar avatar-position"></div></a>
         {% else %}
-        <img src="{% static 'ProfilesDB/user.png' %}" class="rounded-circle avatar avatar-position shadow-lg" alt="">
+          <a href="/profile/{{ username }}"><div style="background-image: url({% static 'ProfilesDB/user.png' %})" class="avatar avatar-position"></div></a>
         {% endif %}
       </div>
       <div {% if max_level %}class="rounded-3 my-1 fw-bold text-white"
@@ -51,39 +64,63 @@
       </div>
       {% endif %}
       <div class="flex-row">
-        <strong class="fs-6">Registration date:</strong> {{ user.date_joined.date }}
+        <strong class="fs-6">Registration date:</strong> {{ registration_date }}
       </div>
-      <div class="flex-row">
-        <strong class="fs-6">Email:</strong> {{ user.email }}
-      </div>
+      {% if email %}
+        <div class="flex-row">
+          <strong class="fs-6">Email:</strong> {{ email }}
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>
-<div class="d-flex flex-column p-3 theme-container rounded-bottom shadow">
-    <ul class="nav nav-pills flex-column mb-auto">
-      <div class="text-center fw-bold">
-        Profile management
-      </div>
-      <hr>
+{% if not guest %}
+  <div class="mt-2 text-center theme-header container-fluid py-1 pt-2 rounded-top">
+    <h5 class="text-center">
+      Profile management
+    </h5>
+  </div>
+  <div class="d-flex flex-column theme-container rounded-bottom shadow py-1 px-3">
+    <ul class="nav nav-pills flex-column">
       {% if active_settings %}
-        {% include 'sitesidebar/element.html' with option='Account settings' url='/profile/settings' active=True%}
+        {% include 'sitesidebar/element.html' with option='Account settings' url='/settings' active=True%}
       {% else %}
-        {% include 'sitesidebar/element.html' with option='Account settings' url='/profile/settings'%}
+        {% include 'sitesidebar/element.html' with option='Account settings' url='/settings'%}
       {% endif %}
       {% if active_purchase %}
         {% include 'sitesidebar/element.html' with option='Purchase history' active=True%}
       {% else %}
         {% include 'sitesidebar/element.html' with option='Purchase history' %}
       {% endif %}
-      <hr>
-      {% if has_back %}
-        {% include 'sitesidebar/element.html' with option='Back to profile' url='/profile' %}
-      {% else %}
-        {% include 'sitesidebar/element.html' with option='Log out' url='/profile/logout' %}
-      {% endif %}
+      <hr class="m-1">
+      {% include 'sitesidebar/element.html' with option='Log out' url='logout' %}
     </ul>
-</div>
+  </div>
 
+  {% if group %}
 
+    {% include 'sitepages/profile/sidebar_group.html' %}
 
+  {% else %}
 
+    <div class="mt-2 text-center theme-header container-fluid py-1 pt-2 rounded-top">
+      <h5 class="text-center">Group</h5>
+    </div>
+    <div class="d-flex flex-column theme-container rounded-bottom shadow py-1 px-3">
+      <div class="text-center py-2">
+        <i>You are not in any group yet...</i>
+      </div>
+      <hr class="m-1">
+      <ul class="nav nav-pills flex-column">
+        {% if active_create_group %}
+          {% include 'sitesidebar/element.html' with option='Create a group' url='/group/create' active=True%}
+        {% else %}
+          {% include 'sitesidebar/element.html' with option='Create a group' url='/group/create'%}
+        {% endif %}
+        {% include 'sitesidebar/element.html' with option='Find a group' url='/community/find-a-group'%}
+      </ul>
+    </div>
+
+  {% endif %}
+
+{% endif %}

@@ -1,7 +1,7 @@
-<div class="hero-card m-1" style=" background-image: url({{ image }});">
-  <div class="d-flex flex-column hero-card-content text-center">
-    <div>{{ name|default:'name'}}</div>
-    <div>lvl {{ lvl|default:1 }}</div>
-    <div>{{ plays_type|default:'' }} plays: {{ total_plays|default:0 }}</div>
+<a href="/profile/{{ username }}/hero/{{ hero.id }}" class="hero-card m-1" style="background-image: url({{ hero.hero.avatar }});">
+  <div class="d-flex flex-column hero-card-content text-center text-light">
+    <div>{{ hero.hero.name }}</div>
+    <div>lvl {{ hero.level }}</div>
+    <div>{{ plays_type }} plays: {{ hero.times_played }}</div>
   </div>
-</div>
+</a>

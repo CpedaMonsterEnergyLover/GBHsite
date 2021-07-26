@@ -7,6 +7,12 @@ from django.dispatch import receiver
 import GameObjectsDB
 from GameObjectsDB import *
 
+ROLES = (
+    ('dps', 'DPS'),
+    ('healer', 'Healer'),
+    ('tank', 'tank')
+)
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -18,6 +24,7 @@ class Profile(models.Model):
     achievements = models.ManyToManyField('GameObjectsDB.Achievement', through='ProfileHasAchievement')
     dice = models.ManyToManyField('GameObjectsDB.Dice', through='ProfileHasDice')
     avatar = models.CharField(null=True, blank=True, default=None, max_length=200)
+    group = models.ForeignKey('Group', on_delete=models.DO_NOTHING, null=True, blank=True, default=None)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -92,7 +99,7 @@ class ProfileHasHero(models.Model):
     hero = models.ForeignKey('GameObjectsDB.Hero', on_delete=models.DO_NOTHING)
     level = models.IntegerField(default=1)
     date_obtained = models.DateField(null=False, blank=False)
-    times_played = models.IntegerField(default=0)
+    times_played = models.IntegerField(default=0, editable=False)
     group_played = models.IntegerField(default=0)
     solo_played = models.IntegerField(default=0)
     equipment_weapon = models.ForeignKey('GameObjectsDB.Equipment', on_delete=models.DO_NOTHING,
@@ -140,3 +147,29 @@ class DiceInline(admin.TabularInline):
 
 class ProfileAdmin(admin.ModelAdmin):
     inlines = (HeroesInline, AchievementsInline, DiceInline)
+
+
+class Group(models.Model):
+    leader = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='%(class)s_leader')
+    name = models.CharField(null=False, blank=False, default='New party', max_length=50)
+    date_created = models.DateField(null=False, blank=False, auto_now_add=True)
+    members = models.ManyToManyField(User, through='GroupHasMember', null=True, blank=True)
+    private = models.BooleanField(null=False, default=False, blank=False)
+    min_level = models.IntegerField(null=False, default=1, blank=False)
+
+
+class GroupHasMember(models.Model):
+    group = models.ForeignKey('Group', on_delete=models.CASCADE)
+    member = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_joined = models.DateField(null=False, blank=False, auto_now_add=True)
+    role = models.CharField(null=False, blank=False, default=ROLES[0], choices=ROLES, max_length=10)
+    hero = models.ForeignKey('ProfileHasHero', on_delete=models.DO_NOTHING, null=True, blank=True)
+
+
+class MembersInline(admin.TabularInline):
+    model = GroupHasMember
+    extra = 1
+
+
+class MembersAdmin(admin.ModelAdmin):
+    inlines = (MembersInline,)

@@ -1,7 +1,7 @@
 from .utils import *
 
 
-def sidebar_data(user):
+def sidebar_data(user, guest):
     exp = user.profile.experience
     # level
     level = calc_level(exp)
@@ -12,7 +12,18 @@ def sidebar_data(user):
     # sidebar exp
     left_exp = calc_left_exp(exp)
     percent = left_exp // 10
-    return {'level': level,
+    username = user.username
+    registration_date = user.date_joined.date
+    email = user.email
+    avatar = user.profile.avatar
+    if guest:
+        email = None
+    return {'avatar': avatar,
+            'guest': guest,
+            'username': username,
+            'registration_date': registration_date,
+            'email': email,
+            'level': level,
             'exp': left_exp,
             'percent': percent,
             'max_level': max_level}

@@ -1,0 +1,7 @@
+<a href="{{ link|default:'#' }}" class="hero-card m-1" style="background-image: url({{ dice.dice.avatar }});">
+  <div class="d-flex flex-column hero-card-content text-center text-light">
+    <div>{{ dice.dice.name }}</div>
+    <div>lvl {{ dice.level }}</div>
+    <div>{{ plays_type }} plays: {{ dice.times_played }}</div>
+  </div>
+</a>

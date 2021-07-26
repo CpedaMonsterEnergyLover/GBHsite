@@ -14,5 +14,7 @@ admin.site.register(game_object_models.Equipment)
 admin.site.register(models.ProfileHasHero)
 admin.site.register(models.ProfileHasAchievement)
 admin.site.register(models.ProfileHasDice)
+admin.site.register(models.GroupHasMember)
 
 admin.site.register(models.Profile, models.ProfileAdmin)
+admin.site.register(models.Group, models.MembersAdmin)

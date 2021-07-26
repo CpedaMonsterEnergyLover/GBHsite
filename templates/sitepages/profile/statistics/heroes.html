@@ -34,8 +34,8 @@
   {% if heroes_count %}
     <h5 class="pt-2">Click on hero to browse its data</h5>
     <div class="row row-cols-5 justify-content-center">
-    {% for hero in heroes %}
-      {% include 'sitepages/profile/statistics/herocard.html' with plays_type='Total' image=hero.hero.avatar name=hero.hero.name lvl=hero.level total_plays=hero.times_played%}
+    {% for i in heroes %}
+      {% include 'sitepages/profile/statistics/herocard.html' with plays_type='Total' hero=i%}
     {% endfor %}
     {% if more_than_9 %}
       <div class="hero-card m-1" style="background-image: url(https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/users4.png);">
@@ -59,8 +59,8 @@
   <h5 class="pt-2">Top most-played heroes (solo)</h5>
   {% if top_solo %}
     <div class="row row-cols-5 justify-content-center">
-    {% for hero in top_solo %}
-      {% include 'sitepages/profile/statistics/herocard.html' with plays_type='Solo' image=hero.hero.avatar name=hero.hero.name lvl=hero.level total_plays=hero.solo_played%}
+    {% for i in top_solo %}
+      {% include 'sitepages/profile/statistics/herocard.html' with plays_type='Total' hero=i%}
     {% endfor %}
     </div>
   {% else %}
@@ -72,8 +72,8 @@
   <h5>Top most-played heroes (group)</h5>
     {% if top_group %}
     <div class="row row-cols-5 justify-content-center">
-    {% for hero in top_group %}
-      {% include 'sitepages/profile/statistics/herocard.html' with plays_type='Group' image=hero.hero.avatar name=hero.hero.name lvl=hero.level total_plays=hero.group_played%}
+    {% for i in top_group %}
+      {% include 'sitepages/profile/statistics/herocard.html' with plays_type='Total' hero=i%}
     {% endfor %}
     </div>
   {% else %}

@@ -75,3 +75,5 @@ class Hero(models.Model):
     armor_type = models.CharField(blank=False, null=False, default=ARMOR_TYPES[0], choices=ARMOR_TYPES, max_length=2)
     # Abilities
     # stat_set
+
+

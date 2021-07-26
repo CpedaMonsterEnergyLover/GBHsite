@@ -2,8 +2,8 @@
   {% if dice_count %}
     <h5 class="pt-2">Click on dice to browse its data</h5>
     <div class="row row-cols-5 justify-content-center">
-    {% for dice in dice_list %}
-      {% include 'sitepages/profile/statistics/herocard.html' with plays_type='Total' image=dice.dice.avatar name=dice.dice.name lvl=dice.level total_plays=dice.times_played%}
+    {% for i in dice_list %}
+      {% include 'sitepages/profile/statistics/dicecard.html' with plays_type='Total' dice=i%}
     {% endfor %}
     {% if more_than_9d %}
       <div class="hero-card m-1" style="background-image: url(https://www.nicepng.com/png/detail/393-3932916_black-dice-png-seven-up-seven-down-dice.png);">
@@ -26,8 +26,8 @@
   <h5 class="pt-2">Top 5 most-played dice</h5>
   {% if top_dice %}
     <div class="row row-cols-5 justify-content-center">
-    {% for dice in top_dice %}
-      {% include 'sitepages/profile/statistics/herocard.html' with plays_type='Total' image=dice.dice.avatar name=dice.dice.name lvl=dice.level total_plays=dice.times_played%}
+    {% for i in top_dice %}
+      {% include 'sitepages/profile/statistics/dicecard.html' with plays_type='Total' dice=i%}
     {% endfor %}
     </div>
   {% else %}

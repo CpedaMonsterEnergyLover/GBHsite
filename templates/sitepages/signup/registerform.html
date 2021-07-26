@@ -3,30 +3,37 @@
   <div class="mb-3">
     <label for="{{ signup_form.username.id_for_label }}" class="form-label fs-6 pt-1">{{ signup_form.username.label_tag }}</label>
     {{ signup_form.username }}
+      <div class="my-3 bg-danger text-white fs-6 rounded">
+        {{ signup_form.username.errors }}
+      </div>
   </div>
   <div class="mb-3">
     <label for="{{ signup_form.password.id_for_label }}" class="form-label fs-6">{{ signup_form.password.label_tag }}</label>
     {{ signup_form.password }}
+    <div class="my-3 bg-danger text-white fs-6 rounded">
+      {{ signup_form.password.errors }}
+    </div>
   </div>
     <div class="mb-3">
     <label for="{{ signup_form.password_confirm.id_for_label }}" class="form-label fs-6">{{ signup_form.password_confirm.label_tag }}</label>
     {{ signup_form.password_confirm }}
+    <div class="my-3 bg-danger text-white fs-6 rounded">
+      {{ signup_form.password_confirm.errors }}
+    </div>
   </div>
   <div class="mb-3">
     <label for="{{ signup_form.email.id_for_label }}" class="form-label fs-6">{{ signup_form.email.label_tag }}</label>
     {{ signup_form.email }}
+    <div class="my-3 bg-danger text-white fs-6 rounded">
+      {{ signup_form.email.errors }}
+    </div>
   </div>
   <div class="mb-3">
     <label for="{{ signup_form.birthday.id_for_label }}">{{ signup_form.birthday.label_tag }}</label>
     {{ signup_form.birthday }}
-  </div>
-  <div class="my-3 bg-danger text-white fs-6 rounded">
-    {{ signup_form.non_field_errors }}
-    {{ signup_form.username.errors }}
-    {{ signup_form.password.errors }}
-    {{ signup_form.password_confirm.errors }}
-    {{ signup_form.email.errors }}
-    {{ signup_form.birthday.errors }}
+    <div class="my-3 bg-danger text-white fs-6 rounded">
+      {{ signup_form.birthday.errors }}
+    </div>
   </div>
   <div class="d-flex justify-content-center mb-3">
     <input type="submit" class="btn btn-outline-success shadow-sm" value="Submit">

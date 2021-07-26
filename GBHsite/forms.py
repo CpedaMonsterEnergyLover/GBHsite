@@ -34,7 +34,7 @@ class SignUpForm(forms.Form):
             raise forms.ValidationError("Enter a valid date of birth")
         # username exists validation
         username = cleaned_data.get("username")
-        if User.objects.filter(username=cleaned_data['username']).exists():
+        if User.objects.filter(username=username).exists():
             raise ValidationError({'username': ['This username is already taken']})
 
     def __init__(self, *args, **kwargs):
