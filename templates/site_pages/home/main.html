@@ -1,0 +1,18 @@
+{% extends "site_root/root.html" %}
+{% block content %}
+  <div class="col-md-9">
+  <div class="p-1 pt-2 px-3 container theme-home-header theme-hidden-top">
+    <h2>Latest news</h2>
+  </div>
+    <div class="container theme-home-container rounded-bottom shadow py-1 mb-2">
+      {% include 'site_pages/home/article.html' with title="Article" tip='tip' link='https://wallpapercave.com/wp/fjEEA7q.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
+      {% include 'site_pages/home/article.html' with title="Article" tip='tip' link='https://wallpaperaccess.com/full/374252.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
+      {% include 'site_pages/home/article.html' with title="Article" tip='tip' link='https://cdn.wallpapersafari.com/59/7/gewQOE.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
+      {% include 'site_pages/home/article.html' with title="Article" tip='tip' link='https://lovelytab.com/wp-content/uploads/2018/12/img1543916656153-1024x683.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
+      {% include 'site_pages/home/article.html' with title="Article" tip='tip' link='https://wallpapercave.com/wp/fjEEA7q.jpg' description='kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! kittens! '%}
+    </div>
+  </div>
+  <div class="col-md-3 d-none d-sm-none d-md-block">
+    {% include 'site_sidebar/sidebar.html' with sidebar_content='site_pages/home/sidebar.html' title='Sidebar' theme='home' %}
+  </div>
+{% endblock %}

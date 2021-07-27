@@ -1,0 +1,14 @@
+{% extends "site_root/root.html" %}
+{% block content %}
+  <div class="col-3 d-none d-lg-block page-column-position">
+    {% include 'profiles_pages/profile/sidebar.html' with active_create_group=True%}
+  </div>
+  <div class="col page-column-position">
+    <div class="p-0 py-2 px-3 container theme-header rounded-top">
+      <h2 class="m-0">Create a group</h2>
+    </div>
+      <div class="container-fluid theme-container shadow px-0 rounded-bottom">
+        {% include 'profiles_pages/create_group/create_group_form.html' %}
+      </div>
+  </div>
+{% endblock %}

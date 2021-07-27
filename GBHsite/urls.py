@@ -5,16 +5,13 @@ from django.contrib.auth import views as auth_views
 from .forms import UserLoginForm
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('ProfilesDB.urls')),
+    path('', include('Profiles.urls')),
+    path('', include('GameObjects.urls')),
     path('', views.welcome_site),
     path('signup', views.signup),
-    path('login', auth_views.LoginView.as_view(template_name='sitepages/login/main.html',
+    path('login', auth_views.LoginView.as_view(template_name='site_pages/login/main.html',
                                                authentication_form=UserLoginForm,
                                                redirect_field_name='/profile')),
     path('logout', views.logout_user),
-
-    path('profile/<str:name>', views.profile),
-    path('settings', views.settings),
-    path('settings/redirect-success/<str:action>/', views.redirect_success)
 ]
 
