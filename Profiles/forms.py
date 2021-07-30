@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator, validate_slug
 
-from GBHsite.utils import valid_url_extension, valid_url_mimetype
+from Root.utils import valid_url_extension, valid_url_mimetype
 from .models import ROLES
 
 

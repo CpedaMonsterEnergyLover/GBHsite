@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-import GameObjects
-from GameObjects import *
 
 ROLES = (
     ('dps', 'DPS'),
@@ -153,7 +151,7 @@ class Group(models.Model):
     leader = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='%(class)s_leader')
     name = models.CharField(null=False, blank=False, default='New party', max_length=50)
     date_created = models.DateField(null=False, blank=False, auto_now_add=True)
-    members = models.ManyToManyField(User, through='GroupHasMember', null=True, blank=True)
+    members = models.ManyToManyField(User, through='GroupHasMember')
     private = models.BooleanField(null=False, default=False, blank=False)
     min_level = models.IntegerField(null=False, default=1, blank=False)
 

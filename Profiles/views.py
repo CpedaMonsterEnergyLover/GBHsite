@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
-from GBHsite.data_preparator import sidebar_data, dice_data, stat_data, hero_data, achievements_data
+from Root.data_preparator import sidebar_data, dice_data, stat_data, hero_data, achievements_data
 from Profiles.forms import CreateGroupForm, ChangeUsernameForm, ChangePasswordForm, ChangeEmailForm, ChangeAvatarForm
 from Profiles.models import Group, GroupHasMember
 
