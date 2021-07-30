@@ -47,10 +47,10 @@
           {% if user.profile.avatar %}
             <img src="{{ user.profile.avatar }}" alt="" width="32" height="32" class="rounded-circle header_icon">
           {% else %}
-            <img src="{% static 'ProfilesDB/user.png' %}" alt="" width="32" height="32" class="rounded-circle header_icon">
+            <img src="{% static 'Profiles/user.png' %}" alt="" width="32" height="32" class="rounded-circle header_icon">
           {% endif %}
         {% else %}
-          <img src="{% static 'ProfilesDB/user.png' %}" alt="" width="32" height="32" class="rounded-circle">
+          <img src="{% static 'Profiles/user.png' %}" alt="" width="32" height="32" class="rounded-circle">
         {% endif %}
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">

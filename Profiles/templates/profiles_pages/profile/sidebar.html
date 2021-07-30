@@ -50,7 +50,7 @@
         {% if avatar %}
           <a href="/profile/{{ username }}"><div style="background-image: url({{ avatar }})" class="avatar thumb-avatar avatar-position"></div></a>
         {% else %}
-          <a href="/profile/{{ username }}"><div style="background-image: url({% static 'ProfilesDB/user.png' %})" class="avatar avatar-position"></div></a>
+          <a href="/profile/{{ username }}"><div style="background-image: url({% static 'Profiles/user.png' %})" class="avatar avatar-position"></div></a>
         {% endif %}
       </div>
       <div {% if max_level %}class="rounded-3 my-1 fw-bold text-white"

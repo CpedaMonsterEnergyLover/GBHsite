@@ -18,20 +18,11 @@ class Profile(models.Model):
     experience = models.IntegerField(null=False, blank=False, default=0)
     ardor = models.IntegerField(null=False, blank=False, default=0)
     money = models.BigIntegerField(null=False, blank=False, default=0)
-    heroes = models.ManyToManyField('GameObjects.Hero', through='ProfileHasHero')
+    heroes = models.ManyToManyField('GameObjects.Hero', through='ProfileHasHero', null=True)
     achievements = models.ManyToManyField('GameObjects.Achievement', through='ProfileHasAchievement')
     dice = models.ManyToManyField('GameObjects.Dice', through='ProfileHasDice')
     avatar = models.CharField(null=True, blank=True, default=None, max_length=200)
     group = models.ForeignKey('Group', on_delete=models.DO_NOTHING, null=True, blank=True, default=None)
-
-    @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
-
-    @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
 
 
 class Statistics(models.Model):
@@ -42,15 +33,6 @@ class Statistics(models.Model):
     total_ardor_points = models.BigIntegerField(default=0, null=False, blank=False)
     dice_rolled = models.BigIntegerField(default=0, null=False, blank=False)
 
-    @receiver(post_save, sender=User)
-    def create_statistic(sender, instance, created, **kwargs):
-        if created:
-            Statistics.objects.create(user=instance)
-
-    @receiver(post_save, sender=User)
-    def save_statistic(sender, instance, **kwargs):
-        instance.statistics.save()
-
 
 class SoloData(models.Model):
     statistics_link = models.OneToOneField(Statistics, on_delete=models.CASCADE)
@@ -59,16 +41,6 @@ class SoloData(models.Model):
     monsters_killed = models.BigIntegerField(default=0, null=False, blank=False)
     max_floor_normal = models.IntegerField(default=0, null=False, blank=False)
     max_floor_chaos = models.IntegerField(default=0, null=False, blank=False)
-
-    @receiver(post_save, sender=Statistics)
-    def create_solo_data(sender, instance, created, **kwargs):
-        if created:
-            created_data = SoloData.objects.create(statistics_link=instance)
-            instance.solo = created_data
-
-    @receiver(post_save, sender=Statistics)
-    def save_solo_data(sender, instance, **kwargs):
-        instance.solo.save()
 
 
 class GroupData(models.Model):
@@ -81,32 +53,22 @@ class GroupData(models.Model):
     total_damage_healed = models.IntegerField(default=0, null=False, blank=False)
     total_damage_absorbed = models.IntegerField(default=0, null=False, blank=False)
 
-    @receiver(post_save, sender=Statistics)
-    def create_group_data(sender, instance, created, **kwargs):
-        if created:
-            created_data = GroupData.objects.create(statistics_link=instance)
-            instance.group = created_data
-
-    @receiver(post_save, sender=Statistics)
-    def save_group_data(sender, instance, **kwargs):
-        instance.group.save()
-
 
 class ProfileHasHero(models.Model):
-    profile = models.ForeignKey('Profile', on_delete=models.DO_NOTHING)
-    hero = models.ForeignKey('GameObjects.Hero', on_delete=models.DO_NOTHING)
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    hero = models.ForeignKey('GameObjects.Hero', null=True, on_delete=models.CASCADE)
     level = models.IntegerField(default=1)
     date_obtained = models.DateField(null=False, blank=False)
     times_played = models.IntegerField(default=0, editable=False)
     group_played = models.IntegerField(default=0)
     solo_played = models.IntegerField(default=0)
-    equipment_weapon = models.ForeignKey('GameObjects.Equipment', on_delete=models.DO_NOTHING,
+    equipment_weapon = models.ForeignKey('GameObjects.Equipment', on_delete=models.SET_NULL,
                                          related_name='%(class)s_weapon', blank=True, null=True)
-    equipment_body = models.ForeignKey('GameObjects.Equipment', on_delete=models.DO_NOTHING,
+    equipment_body = models.ForeignKey('GameObjects.Equipment', on_delete=models.SET_NULL,
                                        related_name='%(class)s_body', blank=True, null=True)
-    equipment_trinket1 = models.ForeignKey('GameObjects.Equipment', on_delete=models.DO_NOTHING,
+    equipment_trinket1 = models.ForeignKey('GameObjects.Equipment', on_delete=models.SET_NULL,
                                            related_name='%(class)s_trinket1', blank=True, null=True)
-    equipment_trinket2 = models.ForeignKey('GameObjects.Equipment', on_delete=models.DO_NOTHING,
+    equipment_trinket2 = models.ForeignKey('GameObjects.Equipment', on_delete=models.SET_NULL,
                                            related_name='%(class)s_trinket2', blank=True, null=True)
     # chosen_abilities
 

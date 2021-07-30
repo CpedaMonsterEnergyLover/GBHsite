@@ -88,6 +88,7 @@ def redirect_success(request, action):
             'avatar_form': ChangeAvatarForm(),
             action: True}
     data.update(sidebar_data(request.user, False))
+    data.update({'group': request.user.profile.group})
     return render(request, 'profiles_pages/profile/settings/main.html', data)
 
 

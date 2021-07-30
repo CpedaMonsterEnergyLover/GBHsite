@@ -2,12 +2,14 @@ from django.db import models
 
 
 class Dice(models.Model):
+    string_id = models.CharField(null=False, blank=False, max_length=64, unique=True)
     name = models.CharField(null=False, blank=False, max_length=100)
     description = models.CharField(null=False, blank=False, max_length=500, default='no description')
     avatar = models.CharField(null=False, blank=False, max_length=200)
 
 
 class Achievement(models.Model):
+    string_id = models.CharField(null=False, blank=False, max_length=64, unique=True)
     name = models.CharField(null=False, blank=False, max_length=100)
     description = models.CharField(null=False, blank=False, max_length=500, default='no description')
     avatar = models.CharField(null=True, blank=True, max_length=200, default=None)
@@ -33,6 +35,7 @@ class Achievement(models.Model):
 
 
 class Equipment(models.Model):
+    string_id = models.CharField(null=False, blank=False, max_length=64, unique=True)
     name = models.CharField(null=False, blank=False, max_length=100)
     description = models.CharField(null=False, blank=True, max_length=500, default='no description')
     avatar = models.CharField(null=True, blank=True, max_length=200)
@@ -53,6 +56,7 @@ class Equipment(models.Model):
 
 
 class Hero(models.Model):
+    string_id = models.CharField(null=False, blank=False, max_length=64, unique=True)
     name = models.CharField(null=False, blank=False, max_length=100)
     description = models.CharField(null=False, blank=False, max_length=500, default='no description')
     base_health = models.IntegerField(null=False, default=1)
