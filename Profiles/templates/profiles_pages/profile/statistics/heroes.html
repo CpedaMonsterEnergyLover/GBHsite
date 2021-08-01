@@ -35,7 +35,7 @@
     <h5 class="pt-2">Click on hero to browse its data</h5>
     <div class="row row-cols-5 justify-content-center">
     {% for i in heroes %}
-      {% include 'profiles_pages/profile/statistics/herocard.html' with plays_type='Total' hero=i%}
+      {% include 'profiles_pages/profile/statistics/herocard.html' with total=True hero=i%}
     {% endfor %}
     {% if more_than_9 %}
       <div class="hero-card m-1" style="background-image: url(https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/users4.png);">
@@ -60,7 +60,7 @@
   {% if top_solo %}
     <div class="row row-cols-5 justify-content-center">
     {% for i in top_solo %}
-      {% include 'profiles_pages/profile/statistics/herocard.html' with plays_type='Total' hero=i%}
+      {% include 'profiles_pages/profile/statistics/herocard.html' with solo=True hero=i%}
     {% endfor %}
     </div>
   {% else %}
@@ -73,7 +73,7 @@
     {% if top_group %}
     <div class="row row-cols-5 justify-content-center">
     {% for i in top_group %}
-      {% include 'profiles_pages/profile/statistics/herocard.html' with plays_type='Total' hero=i%}
+      {% include 'profiles_pages/profile/statistics/herocard.html' with group=True hero=i%}
     {% endfor %}
     </div>
   {% else %}
@@ -87,12 +87,12 @@
       <div class="d-flex flex-row justify-content-start pb-1">
         <div><span class="badge bg-warning badge-pill list-item badge-text mx-1">DPS</span></div>
         <div><span class="badge bg-success badge-pill badge-text mx-1">Healer</span></div>
-        <div><span class="badge bg-secondary badge-pill list-item badge-text mx-1">Tank</span></div>
+        <div><span class="badge bg-danger badge-pill list-item badge-text mx-1">Tank</span></div>
       </div>
       <div class="progress mb-3 bg-dark" style="height: 30px; font-size: 16px;">
         <div class="progress-bar bg-warning fw-bold badge-text" role="progressbar" style="width: {{ dps_percent }}%; overflow: hidden; min-width: 30px" aria-valuenow="{{ dps_percent }}" aria-valuemin="0" aria-valuemax="100">{{ dps_percent }}%</div>
         <div class="progress-bar bg-success fw-bold badge-text" role="progressbar" style="width: {{ healer_percent }}%; overflow: hidden; min-width: 30px" aria-valuenow="{{ healer_percent }}" aria-valuemin="0" aria-valuemax="100">{{ healer_percent }}%</div>
-        <div class="progress-bar bg-secondary fw-bold badge-text" role="progressbar" style="width: {{ tank_percent }}%; overflow: hidden; min-width: 30px" aria-valuenow="{{ tank_percent }}" aria-valuemin="0" aria-valuemax="100">{{ tank_percent }}%</div>
+        <div class="progress-bar bg-danger fw-bold badge-text" role="progressbar" style="width: {{ tank_percent }}%; overflow: hidden; min-width: 30px" aria-valuenow="{{ tank_percent }}" aria-valuemin="0" aria-valuemax="100">{{ tank_percent }}%</div>
       </div>
     {% else %}
       <div class="d-flex container-fluid text-center align-items-center justify-content-center" style="min-height: 80px">

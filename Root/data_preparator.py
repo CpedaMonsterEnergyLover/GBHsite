@@ -97,7 +97,8 @@ def hero_data(user):
             'more_than_9': more_than_9,
             'dps_percent': dps_percent,
             'healer_percent': healer_percent,
-            'tank_percent': tank_percent}
+            'tank_percent': tank_percent,
+            'group_games': group_plays_count}
 
 
 def achievements_data(user):

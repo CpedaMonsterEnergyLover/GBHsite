@@ -2,6 +2,8 @@
   <div class="d-flex flex-column hero-card-content text-center text-light">
     <div>{{ hero.hero.name }}</div>
     <div>lvl {{ hero.level }}</div>
-    <div>{{ plays_type }} plays: {{ hero.times_played }}</div>
+    {% if total %}<div>Total plays: {{ hero.times_played }}</div>{% endif %}
+    {% if solo %}<div>Solo plays: {{ hero.solo_played }}</div>{% endif %}
+    {% if group %}<div>Group plays: {{ hero.group_played }}</div>{% endif %}
   </div>
 </a>

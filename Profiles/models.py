@@ -1,8 +1,6 @@
 from django.contrib import admin
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 
 ROLES = (
@@ -120,7 +118,7 @@ class Group(models.Model):
 
 class GroupHasMember(models.Model):
     group = models.ForeignKey('Group', on_delete=models.CASCADE)
-    member = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.ForeignKey(User, on_delete=models.CASCADE)
     date_joined = models.DateField(null=False, blank=False, auto_now_add=True)
     role = models.CharField(null=False, blank=False, default=ROLES[0], choices=ROLES, max_length=10)
     hero = models.ForeignKey('ProfileHasHero', on_delete=models.DO_NOTHING, null=True, blank=True)

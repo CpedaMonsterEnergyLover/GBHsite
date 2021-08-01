@@ -1,6 +1,5 @@
 import graphene
 from graphene_django import DjangoObjectType
-from graphene_django import DjangoListField
 from GameObjects.models import Dice, Achievement, Equipment, Hero
 
 

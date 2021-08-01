@@ -1,4 +1,0 @@
-DICE_IDS = {}
-ACHIEVEMENT_IDS = {}
-EQUIPMENT_IDS = {}
-HERO_IDS = {}
